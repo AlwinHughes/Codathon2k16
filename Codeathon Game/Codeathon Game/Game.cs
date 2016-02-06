@@ -63,7 +63,6 @@ namespace Codeathon_Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-<<<<<<< HEAD
             spriteBatch.Begin();
             spriteBatch.DrawString(fonts["font16"], "HELLO BOSS 16", new Vector2(50, 50), Color.Black);
             spriteBatch.DrawString(fonts["font24"], "HELLO BOSS 24", new Vector2(50, 100), Color.Black);
@@ -72,8 +71,6 @@ namespace Codeathon_Game
             spriteBatch.End();
             // TODO: Add your drawing code here
 
-=======
->>>>>>> 12234bf3f62d47c17e676ddf8613920e5a6e7d65
             base.Draw(gameTime);
         }
     }
