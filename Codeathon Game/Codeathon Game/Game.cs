@@ -110,7 +110,7 @@ namespace Codeathon_Game
             ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).center();
             ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
 
-            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Player(new Vector2(100, 200), Content.Load<Texture2D>("images/Body"), Content.Load<Texture2D>("images/Track")));
+            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Player(new Vector2(100, 100), Content.Load<Texture2D>("images/Body"), Content.Load<Texture2D>("images/Track")));
 
             Texture2D wall = Content.Load<Texture2D>("images/Wall");
 
@@ -163,9 +163,7 @@ namespace Codeathon_Game
                 //TODO fill in code here
                 if (Keyboard.GetState().IsKeyDown(Keys.O))
                 {
-
                      GAMESTATE = GameState.GAMEPLAY_VIEW;
-
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -181,8 +179,6 @@ namespace Codeathon_Game
                     
                         GAMESTATE = GameState.GAMEPLAY_CODE;
                         last_time_switch = DateTime.Now.Millisecond;
-                    
-                    
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -211,7 +207,7 @@ namespace Codeathon_Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront);
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
        
             foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
