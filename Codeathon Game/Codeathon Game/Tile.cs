@@ -22,6 +22,7 @@ namespace Codeathon_Game
         public Tile(Vector2 location,  WallState state, int wall_roation,Texture2D wall)
             : base(wall, new Vector2(64,64))
         {
+
             this.state = state;
             this.location = location;
             rotation = wall_roation * 90;
