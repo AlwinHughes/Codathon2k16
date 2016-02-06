@@ -72,6 +72,7 @@ namespace Codeathon_Game
         public void setData(Color[] data)
         {
             texture.SetData(data);
+            Debug.WriteLine("work?8");
         }
 
     }

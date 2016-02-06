@@ -30,7 +30,7 @@ namespace Codeathon_Game
         int[] border_widths;
 
         bool complex;
-
+        // used for simple creation
         public TextShow(Vector2 location, int border_size, Color inside_color, Color border_color, string font, string text, Color text_color, bool can_be_draged)
            : base(location, (int)Game.fonts[font].MeasureString(text).X + 8 + border_size, (int)Game.fonts[font].MeasureString(text).Y + 8 + border_size)
         {
@@ -39,7 +39,9 @@ namespace Codeathon_Game
             this.font = font;
             this.inside_color = inside_color;
             this.border_colors = new Color[] { border_color, border_color , border_color , border_color };
+            
             this.border_widths = new int[] { border_size, border_size, border_size, border_size};
+            
             this.text_color = text_color;
             this.text = text;
             this.canBeDraged = can_be_draged;
@@ -49,6 +51,7 @@ namespace Codeathon_Game
             data = new Color[width * height];
             data_to_convert = new Color[width, height];
 
+            
             generateTextureComplex(border_widths, border_colors, inside_color);
 
         }
@@ -158,6 +161,7 @@ namespace Codeathon_Game
                     }
                 }
             }
+            
             convertTo1DArray();
         }
         //public void generateTexture(int border_size, Color inside, Color border, Color text_color)//only alows color change not size change 
@@ -188,7 +192,9 @@ namespace Codeathon_Game
                     data[j * width + i] = data_to_convert[i, j];
                 }
             }
+            
             texture = new Texture2D(Game.graphics.GraphicsDevice, width, height);
+            
             setData(data);
         }
 
@@ -197,6 +203,9 @@ namespace Codeathon_Game
             Game.spriteBatch.Draw(texture, new Rectangle((int)location.X, (int)location.Y, texture.Width, texture.Height), Color.White);
             Game.spriteBatch.DrawString(Game.fonts[font], text, new Vector2(location.X + border_widths[0], location.Y + border_widths[1]), text_color);
         }     
-
+        public void center()
+        {
+            location = new Vector2(location.X - width / 2, location.Y - height / 2);
+        }
     }
 }
