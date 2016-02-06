@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.InputListeners;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,10 @@ namespace Codeathon_Game
     {
         static public GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
+
+
+        private InputListenerManager _inputManager;
+
 
         int window_height;
         int window_width;
@@ -37,6 +42,8 @@ namespace Codeathon_Game
 
         protected override void Initialize()
         {
+            _inputManager = new InputListenerManager();
+
             GAMESTATE = GameState.TITLESCREEN;
             window_width = graphics.GraphicsDevice.DisplayMode.Width;
             window_height = graphics.GraphicsDevice.DisplayMode.Height;
@@ -52,6 +59,16 @@ namespace Codeathon_Game
 
             graphics.ApplyChanges();
             IsMouseVisible = true;
+
+            var keyboardListener = _inputManager.AddListener(new KeyboardListenerSettings());
+
+            //HERE BE BOOTY
+            keyboardListener.KeyPressed += (sender, args) =>
+            {
+                if (args.Key == Keys.Space)
+                    Debug.WriteLine("Space Pressed");
+            };
+
 
             base.Initialize();
         }
@@ -94,7 +111,9 @@ namespace Codeathon_Game
         protected override void Update(GameTime gameTime)
         {
 
-            Debug.WriteLine( DateTime.Now.Millisecond- last_time_switch);
+
+            _inputManager.Update(gameTime);
+
             if (GAMESTATE == GameState.TITLESCREEN)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
