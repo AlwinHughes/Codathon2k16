@@ -23,12 +23,12 @@ namespace Codeathon_Game
         public static Dictionary<string,SpriteFont> fonts;        
 
 
-        List<ObjectToDraw>[] OBJECTS = new List<ObjectToDraw>[]
+        List<ObjectToDrawBase>[] OBJECTS = new List<ObjectToDrawBase>[]
         {
-            new List<ObjectToDraw>(),//title screen
-            new List<ObjectToDraw>(),//game play view
-            new List<ObjectToDraw>(),//game play code
-            new List<ObjectToDraw>()// level select
+            new List<ObjectToDrawBase>(),//title screen
+            new List<ObjectToDrawBase>(),//game play view
+            new List<ObjectToDrawBase>(),//game play code
+            new List<ObjectToDrawBase>()// level select
         };
 
         Texture2D key;
@@ -92,6 +92,12 @@ namespace Codeathon_Game
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
             spriteBatch.End();
             // TODO: Add your drawing code here
+
+            foreach(ObjectToDrawBase draw in OBJECTS[(int)GAMESTATE])
+            {
+                draw.Draw();
+            }
+
 
             base.Draw(gameTime);
         }
