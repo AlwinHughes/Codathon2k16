@@ -76,7 +76,7 @@ namespace Codeathon_Game
             ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_VIEW][0]).location.Y = 5;
             
 
-            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Play Level", Color.Black, false));
+            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Progarm Level", Color.Black, false));
             ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).center();
             ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
 
@@ -90,13 +90,51 @@ namespace Codeathon_Game
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            
+            if (GAMESTATE == GameState.TITLESCREEN)
             {
-                Exit();
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    GAMESTATE = GameState.GAMEPLAY_VIEW;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    Exit();
+                }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            else if( GAMESTATE == GameState.GAMEPLAY_CODE)
             {
-                GAMESTATE = GameState.GAMEPLAY_VIEW;
+                //TODO fill in code here
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    GAMESTATE = GameState.GAMEPLAY_VIEW;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    GAMESTATE = GameState.TITLESCREEN;
+                }
+            }
+            else if(GAMESTATE == GameState.GAMEPLAY_VIEW)
+            {
+                //TODO fill in code here
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    GAMESTATE = GameState.GAMEPLAY_CODE;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    GAMESTATE = GameState.TITLESCREEN;
+                }
+            }
+            else if(GAMESTATE == GameState.LEVEL_SELECT)
+            {
+                //TODO fill in code here
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    GAMESTATE = GameState.TITLESCREEN;
+                }
             }
 
             base.Update(gameTime);
