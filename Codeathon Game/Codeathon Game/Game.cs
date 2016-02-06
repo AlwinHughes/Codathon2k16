@@ -94,6 +94,12 @@ namespace Codeathon_Game
             spriteBatch.End();
             // TODO: Add your drawing code here
 
+            foreach(ObjectToDraw draw in OBJECTS[(int)GAMESTATE])
+            {
+                draw.Draw();
+            }
+
+
             base.Draw(gameTime);
         }
     }
