@@ -192,5 +192,27 @@ namespace Codeathon_Game
         {
             location = new Vector2(location.X - width / 2, location.Y - height / 2);
         }
+
+        public void Dock(List<ObjectToDraw> shapes)
+        {
+            foreach (ObjectToDraw shape in shapes)
+            {
+                if (shape is TextShow && ((TextShow)shape).blockData != null)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        TextShow s = (TextShow)shape;
+                        Vector2[] offsets = new Vector2[2] { new Vector2(0, s.height), new Vector2(s.width, 0) };
+
+                        if (s.blockData.canBeDockedTo[i] && this != s && Game.current.X - offsets[i].X > s.location.X && Game.current.X - offsets[i].X < s.location.X + width && Game.current.Y - offsets[i].Y > s.location.Y && Game.current.Y - offsets[i].Y < s.location.Y + height)
+                        {
+                            dock = shape;
+                            dockOffset = offsets[i];
+                            return;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

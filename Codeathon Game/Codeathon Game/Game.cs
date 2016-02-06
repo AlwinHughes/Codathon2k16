@@ -1,10 +1,17 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended.InputListeners;
-using System;
-using System.Collections.Generic;
+using Microsoft.Xna.Framework.Storage;
 using System.Diagnostics;
+using System.Linq;
+using System.IO.IsolatedStorage;
+using System.IO;
+using System.Xml.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using MonoGame.Extended.InputListeners;
 
 namespace Codeathon_Game
 {
@@ -15,12 +22,13 @@ namespace Codeathon_Game
 
 
         private InputListenerManager _inputManager;
-
-
+        MouseState previous;
+        public static MouseState current;
         int window_height;
         int window_width;
         GameState GAMESTATE;
         int last_time_switch =0;
+        MouseDrag mouse = new MouseDrag();
 
         public static Dictionary<string, SpriteFont> fonts;
 
@@ -114,8 +122,27 @@ namespace Codeathon_Game
 
         protected override void Update(GameTime gameTime)
         {
+            //mouse input
+            current = Mouse.GetState();
+            if (current.LeftButton == ButtonState.Pressed)
+            {
+                if (previous.LeftButton != ButtonState.Pressed)
+                {
+                    mouse.CheckClick(OBJECTS[(int)GAMESTATE]);
+                }
+            }
+            else
+            {
+                if (mouse.draggedObject != null)
+                {
+                    ((TextShow)mouse.draggedObject).Dock(OBJECTS[(int)GameState.GAMEPLAY_VIEW]);
 
-
+                    mouse.draggedObject = null;
+                }
+            }
+            mouse.Update();
+            previous = current;
+            //keyboard input
             _inputManager.Update(gameTime);
 
             if (GAMESTATE == GameState.TITLESCREEN)
