@@ -19,7 +19,6 @@ namespace Codeathon_Game
         public static MouseState current;
         MouseState previous;
 
-
         Screens.TitleScreen titlescreen = new Screens.TitleScreen();
         Screens.GamePlay gameplay = new Screens.GamePlay();
         Screens.GameView gameview = new Screens.GameView();
@@ -63,12 +62,6 @@ namespace Codeathon_Game
 
             graphics.ApplyChanges();
             IsMouseVisible = true;
-
-        
-
-            //HERE BE BOOTY
-           
-
 
             base.Initialize();
         }
