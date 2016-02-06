@@ -23,6 +23,8 @@ namespace Codeathon_Game
             new List<ObjectToDraw>()// level select
         };
 
+        Texture2D key;
+
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -48,8 +50,9 @@ namespace Codeathon_Game
             fonts.Add("font24", Content.Load<SpriteFont>("fonts/font24"));
             fonts.Add("font32", Content.Load<SpriteFont>("fonts/font32"));
             fonts.Add("font40", Content.Load<SpriteFont>("fonts/font40"));
+            fonts.Add("fontText", Content.Load<SpriteFont>("fonts/fontText"));
 
-           
+            key = Content.Load<Texture2D>("images/key");
         }
 
         
@@ -72,10 +75,7 @@ namespace Codeathon_Game
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(fonts["font16"], "HELLO BOSS 16", new Vector2(50, 50), Color.Black);
-            spriteBatch.DrawString(fonts["font24"], "HELLO BOSS 24", new Vector2(50, 100), Color.Black);
-            spriteBatch.DrawString(fonts["font32"], "HELLO BOSS 32", new Vector2(50, 150), Color.Black);
-            spriteBatch.DrawString(fonts["font40"], "HELLO BOSS 40", new Vector2(50, 200), Color.Black);
+            spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
             spriteBatch.End();
             // TODO: Add your drawing code here
 
