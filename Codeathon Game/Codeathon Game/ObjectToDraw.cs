@@ -19,9 +19,50 @@ namespace Codeathon_Game
         public int height { get; private set; }
         public bool canBeDraged;
 
-        public ObjectToDrawBase dock;
+        public ObjectToDraw dock;
         public Vector2 dockOffset;
         public bool is_text_show = false;
+
+
+        public ObjectToDraw(Texture2D texture, Vector2 location, int width, int height)
+        {
+            this.location = location;
+            this.texture = texture;
+            this.width = width;
+            this.height = height;
+
+        }
+
+        public ObjectToDraw(GraphicsDevice d, Vector2 location, int width, int height)
+        {
+            this.location = location;
+            texture = new Texture2D(d, width, height);
+            this.width = width;
+            this.height = height;
+        }
+
+        public ObjectToDraw(Vector2 location, int width, int height)
+        {
+            this.location = location;
+            this.width = width;
+            this.height = height;
+
+        }
+
+        public virtual void draw()
+        {
+
+        }
+
+        public virtual void update()
+        {
+
+        }
+
+        public virtual void checkEdges()
+        {
+
+        }
 
     }
 }
