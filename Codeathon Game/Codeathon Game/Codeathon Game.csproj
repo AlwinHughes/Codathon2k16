@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AnimShape.cs" />
+    <Compile Include="BlockData.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="ObjectToDraw.cs" />
     <Compile Include="Entities\Player.cs" />
