@@ -39,10 +39,10 @@ namespace Codeathon_Game
                     }
                     else if (((TextShow)shape).can_spawn)
                     {
-                        TextShow temp = new TextShow(new Vector2(current.X, current.Y), ((TextShow)shape).type, true);
+                        TextShow temp = new TextShow(new Vector2(shape.location.X,shape.location.Y), ((TextShow)shape).type, true,false);
                         temp.can_spawn = false;
                         temp.dock = null;
-                        offset = new Vector2(Game.current.X - temp.location.X, Game.current.Y);
+                        offset = new Vector2(temp.width/2,temp.height/2);
                         draggedObject = temp;
                         shapes.Add(temp);
                         return;

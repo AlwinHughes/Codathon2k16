@@ -100,9 +100,9 @@ namespace Codeathon_Game
 
 
 
-            gamecode.drawItems.Add(new TextShow(new Vector2(50, 100), blockType.MOVEFORWARD, false));
-            gamecode.drawItems.Add(new TextShow(new Vector2(50, 200), blockType.RIGHT, false));
-            gamecode.drawItems.Add(new TextShow(new Vector2(50, 300), blockType.LEFT, false));
+            gamecode.drawItems.Add(new TextShow(new Vector2(50, 100), blockType.MOVEFORWARD, false,false));
+            gamecode.drawItems.Add(new TextShow(new Vector2(50, 200), blockType.RIGHT, false,false));
+            gamecode.drawItems.Add(new TextShow(new Vector2(50, 300), blockType.LEFT, false,false));
             //eh eh
 
 

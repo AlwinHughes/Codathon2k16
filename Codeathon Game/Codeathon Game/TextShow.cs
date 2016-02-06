@@ -83,16 +83,18 @@ namespace Codeathon_Game
             generateTextureComplex(border_widths, border_colors, inside_color);
         }
 
-        public TextShow(Vector2 location, blockType type,bool can_be_draged)
+        public TextShow(Vector2 location, blockType type,bool canBeDraged, bool can_spawn)
            : base(location, (int)Game.fonts["font32"].MeasureString(BlockData.getName(type)).X + 8 + 4 + 4, (int)Game.fonts["font32"].MeasureString(BlockData.getName(type)).Y + 8 + 4 + 4)
         {
-            if (!can_be_draged)
-            {
-                can_spawn = true;
-            }
+            
+            can_spawn = true;
+
+
+            this.canBeDraged = canBeDraged;
+            this.can_spawn = can_spawn;
             this.type = type;
             
-            this.canBeDraged = can_be_draged;
+            
             blockData = new BlockData(type);
             border_widths = new int[] { 4, 4, 4, 4 };
             
