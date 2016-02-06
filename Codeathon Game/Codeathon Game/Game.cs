@@ -114,12 +114,10 @@ namespace Codeathon_Game
 
             Texture2D wall = Content.Load<Texture2D>("images/Wall");
 
-            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Tile(new Vector2(100,100),Tile.WallState.STRAIGHT,0,wall));
+            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Tile(new Vector2(100,100),Tile.WallState.CORNER_E,0,wall));
 
             key = Content.Load<Texture2D>("images/key");
-            Lock = Content.Load<Texture2D>("images/LockedBlock");
-            //tile = Content.Load<Texture2D>("images/LabTile");
-            
+            Lock = Content.Load<Texture2D>("images/LockedBlock");            
         }
 
         protected override void UnloadContent() { }
@@ -133,7 +131,6 @@ namespace Codeathon_Game
                 if (previous.LeftButton != ButtonState.Pressed)
                 {
                     mouse.CheckClick(OBJECTS[(int)GAMESTATE]);
-                    
                 }
             }
             else
@@ -216,7 +213,6 @@ namespace Codeathon_Game
 
             spriteBatch.Begin();
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
-            
        
             foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
             {
