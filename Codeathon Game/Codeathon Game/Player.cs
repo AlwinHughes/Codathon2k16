@@ -10,10 +10,22 @@ namespace Codeathon_Game
 {
     class Player : ObjectToDraw
     {
+        Texture2D tracks;
 
-        public Player(Texture2D texture, Vector2 location) : base(texture, location)
+        public Player(Texture2D body, Vector2 location,Texture2D tracks) : base(body, location)
+        {
+            this.tracks = tracks;
+
+        }
+
+        public override void Update()
         {
 
+        }
+
+        public override void Draw()
+        {
+            
         }
     }
 }
