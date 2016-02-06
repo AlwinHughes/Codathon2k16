@@ -65,11 +65,11 @@ namespace Codeathon_Game
                 }
                 else if (rotation < rotateGoal)
                 {
-                    rotation += 0.05f;
+                    rotation += (float)Math.PI;
                 }
                 else if (rotation > rotateGoal)
                 {
-                    rotation -= 0.05f;
+                    rotation -= (float)Math.PI;
                 }
             }
             //move towards goal
