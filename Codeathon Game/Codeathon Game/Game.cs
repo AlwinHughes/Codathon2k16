@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Codeathon_Game
 {
@@ -17,9 +16,15 @@ namespace Codeathon_Game
 
         public static Dictionary<string, SpriteFont> fonts;
 
-        List<ObjectToDrawBase>[] OBJECTS;
+        List<ObjectToDraw>[] OBJECTS = new List<ObjectToDraw>[]
+        {
+            new List<ObjectToDraw>(),//title screen
+            new List<ObjectToDraw>(),//game play view
+            new List<ObjectToDraw>(),//game play code
+            new List<ObjectToDraw>()// level select
+        };
 
-        Texture2D key;
+        Texture2D key, Lock;
 
         public Game()
         {
@@ -29,19 +34,19 @@ namespace Codeathon_Game
 
         protected override void Initialize()
         {
-            OBJECTS = new List<ObjectToDrawBase>[]
-            {
-            new List<ObjectToDrawBase>(),//title screen
-            new List<ObjectToDrawBase>(),//game play view
-            new List<ObjectToDrawBase>(),//game play code
-            new List<ObjectToDrawBase>()// level select
-            };
-            Debug.WriteLine("in initialize");
+            GAMESTATE = GameState.TITLESCREEN;
             window_width = graphics.GraphicsDevice.DisplayMode.Width;
             window_height = graphics.GraphicsDevice.DisplayMode.Height;
             graphics.PreferredBackBufferHeight = window_height;
             graphics.PreferredBackBufferWidth = window_width;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
+            
+            var form = (System.Windows.Forms.Form)System.Windows.Forms.Form.FromHandle(Window.Handle);
+            form.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+
+            Window.IsBorderless = true;
+
+
             graphics.ApplyChanges();
             IsMouseVisible = true;
 
@@ -50,8 +55,6 @@ namespace Codeathon_Game
 
         protected override void LoadContent()
         {
-            Debug.WriteLine("in load content");
-            GAMESTATE = GameState.TITLESCREEN;
             spriteBatch = new SpriteBatch(GraphicsDevice);
             fonts = new Dictionary<string, SpriteFont>();
 
@@ -60,11 +63,13 @@ namespace Codeathon_Game
             fonts.Add("font32", Content.Load<SpriteFont>("fonts/font32"));
             fonts.Add("font40", Content.Load<SpriteFont>("fonts/font40"));
             fonts.Add("fontText", Content.Load<SpriteFont>("fonts/fontText"));
-           
+
             OBJECTS[(int)GAMESTATE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font40", "TITLE!!!!!!!!", Color.Black, false));
             ((TextShow)OBJECTS[(int)GAMESTATE][0]).center();
+
+
             key = Content.Load<Texture2D>("images/key");
-            
+            Lock = Content.Load<Texture2D>("images/LockedBlock");
         }
 
         protected override void UnloadContent() { }
@@ -86,12 +91,11 @@ namespace Codeathon_Game
             spriteBatch.Begin();
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
             
-
-            foreach (ObjectToDrawBase curObject in OBJECTS[(int)GAMESTATE])
+       
+            foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
             {
                 curObject.Draw();
             }
-
             spriteBatch.End();
             base.Draw(gameTime);
         }

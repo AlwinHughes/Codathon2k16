@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 namespace Codeathon_Game
 {
-    class Shape : ObjectToDrawBase
+    class Shape : ObjectToDraw
     {
         public Shape(Texture2D texture, Vector2 location)
             : base(texture, location)
