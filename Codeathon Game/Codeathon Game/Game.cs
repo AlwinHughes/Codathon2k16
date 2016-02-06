@@ -16,6 +16,11 @@ namespace Codeathon_Game
 
         private InputListenerManager _inputManager;
 
+        Screens.TitleScreen titlescreen = new Screens.TitleScreen();
+        Screens.GamePlay gameplay = new Screens.GamePlay();
+        Screens.GameView gameview = new Screens.GameView();
+        Screens.GameCode gamecode = new Screens.GameCode();
+        Screens.LevelSelect levelselect = new Screens.LevelSelect();
 
         int window_height;
         int window_width;
@@ -24,13 +29,7 @@ namespace Codeathon_Game
 
         public static Dictionary<string, SpriteFont> fonts;
 
-        List<ObjectToDraw>[] OBJECTS = new List<ObjectToDraw>[]
-        {
-            new List<ObjectToDraw>(),//title screen
-            new List<ObjectToDraw>(),//game play view
-            new List<ObjectToDraw>(),//game play code
-            new List<ObjectToDraw>()// level select
-        };
+        List<ObjectToDraw>[] Screens;
 
         Texture2D key, Lock;
         
@@ -42,6 +41,7 @@ namespace Codeathon_Game
 
         protected override void Initialize()
         {
+            Screens = new List<ObjectToDraw>[]{ titlescreen.drawItems, gameview.drawItems, gamecode.drawItems, levelselect.drawItems };
             _inputManager = new InputListenerManager();
 
             GAMESTATE = GameState.TITLESCREEN;
@@ -63,18 +63,20 @@ namespace Codeathon_Game
             var keyboardListener = _inputManager.AddListener(new KeyboardListenerSettings());
 
             //HERE BE BOOTY
-            keyboardListener.KeyPressed += (sender, args) =>
-            {
-                if (args.Key == Keys.Space)
-                    Debug.WriteLine("Space Pressed");
-            };
+            keyboardListener.KeyPressed += (sender, args) => KeyPress("{0} key pressed", args.Key);
 
 
             base.Initialize();
         }
 
+        private void KeyPress(string v, Keys key)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void LoadContent()
         {
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
             fonts = new Dictionary<string, SpriteFont>();
 
@@ -84,21 +86,20 @@ namespace Codeathon_Game
             fonts.Add("font40", Content.Load<SpriteFont>("fonts/font40"));
             fonts.Add("fontText", Content.Load<SpriteFont>("fonts/fontText"));
 
-            OBJECTS[(int)GameState.TITLESCREEN].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font40", "TITLE!!!!!!!!", Color.Black, false));
-            ((TextShow)OBJECTS[(int)GameState.TITLESCREEN][0]).center();
+            titlescreen.drawItems.Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font40", "TITLE!!!!!!!!", Color.Black, false));
+            ((TextShow)Screens[(int)GameState.TITLESCREEN][0]).center();
+            titlescreen.drawItems.Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Press Space", Color.Black, false));
+            ((TextShow)Screens[(int)GameState.TITLESCREEN][1]).center();
+            ((TextShow)Screens[(int)GameState.TITLESCREEN][1]).location.Y += 100;
 
-            OBJECTS[(int)GameState.TITLESCREEN].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Press Space", Color.Black, false));
-            ((TextShow)OBJECTS[(int)GameState.TITLESCREEN][1]).center();
-            ((TextShow)OBJECTS[(int)GameState.TITLESCREEN][1]).location.Y += 100;
+            gameview.drawItems.Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Play Level", Color.Black, false));
+            gameview.drawItems.Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Progarm Level", Color.Black, false));
+            ((TextShow)Screens[(int)GameState.GAMEPLAY_VIEW][0]).center();
+            ((TextShow)Screens[(int)GameState.GAMEPLAY_VIEW][0]).location.Y = 5;
 
-            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Play Level", Color.Black, false));
-            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_VIEW][0]).center();
-            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_VIEW][0]).location.Y = 5;
-            
-
-            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Progarm Level", Color.Black, false));
-            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).center();
-            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
+            gamecode.drawItems.Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Progarm Level", Color.Black, false));
+            ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).center();
+            ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
 
 
 
@@ -182,9 +183,12 @@ namespace Codeathon_Game
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
             
        
-            foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
+
+      
+         
+            foreach (ObjectToDraw curObject in Screens[(int)GAMESTATE])
             {
-                curObject.Draw();
+               curObject.Draw();
             }
             spriteBatch.End();
             base.Draw(gameTime);
