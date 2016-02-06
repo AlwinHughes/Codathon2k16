@@ -64,10 +64,10 @@ namespace Codeathon_Game
             graphics.ApplyChanges();
             IsMouseVisible = true;
 
-            var keyboardListener = _inputManager.AddListener(new KeyboardListenerSettings());
+        
 
             //HERE BE BOOTY
-            keyboardListener.KeyPressed += (sender, args) => KeyPress("{0} key pressed", args.Key);
+           
 
 
             base.Initialize();
@@ -137,11 +137,12 @@ namespace Codeathon_Game
 
             _inputManager.Update(gameTime);
 
+
             if (GAMESTATE == GameState.TITLESCREEN)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                if (Keyboard.GetState().IsKeyDown(Keys.I))
                 {
-                    GAMESTATE = GameState.GAMEPLAY_VIEW;
+                    GAMESTATE = GameState.GAMEPLAY_CODE;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
@@ -151,14 +152,10 @@ namespace Codeathon_Game
             else if (GAMESTATE == GameState.GAMEPLAY_CODE)
             {
                 //TODO fill in code here
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                if (Keyboard.GetState().IsKeyDown(Keys.O))
                 {
 
-                    if (DateTime.Now.Millisecond - last_time_switch > 500)
-                    {
-                        GAMESTATE = GameState.GAMEPLAY_VIEW;
-                        last_time_switch = DateTime.Now.Millisecond;
-                    }
+                    GAMESTATE = GameState.GAMEPLAY_VIEW;
 
                 }
 
@@ -170,13 +167,12 @@ namespace Codeathon_Game
             else if (GAMESTATE == GameState.GAMEPLAY_VIEW)
             {
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                if (Keyboard.GetState().IsKeyDown(Keys.I))
                 {
-                    if (DateTime.Now.Millisecond - last_time_switch > 500)
-                    {
-                        GAMESTATE = GameState.GAMEPLAY_CODE;
-                        last_time_switch = DateTime.Now.Millisecond;
-                    }
+
+                    GAMESTATE = GameState.GAMEPLAY_CODE;
+                    last_time_switch = DateTime.Now.Millisecond;
+
 
                 }
 
@@ -194,6 +190,12 @@ namespace Codeathon_Game
                 }
             }
 
+
+
+            foreach (ObjectToDraw curObject in Screens[(int)GAMESTATE])
+            {
+                curObject.Update();
+            }
             base.Update(gameTime);
         }
 
