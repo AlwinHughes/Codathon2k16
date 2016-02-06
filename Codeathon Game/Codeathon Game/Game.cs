@@ -15,6 +15,10 @@ namespace Codeathon_Game
 
 
         private InputListenerManager _inputManager;
+        MouseDrag mouse = new MouseDrag();
+        public static MouseState current;
+        MouseState previous;
+
 
         Screens.TitleScreen titlescreen = new Screens.TitleScreen();
         Screens.GamePlay gameplay = new Screens.GamePlay();
@@ -25,14 +29,14 @@ namespace Codeathon_Game
         int window_height;
         int window_width;
         GameState GAMESTATE;
-        int last_time_switch =0;
+        int last_time_switch = 0;
 
         public static Dictionary<string, SpriteFont> fonts;
 
         List<ObjectToDraw>[] Screens;
 
         Texture2D key, Lock;
-        
+
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -41,7 +45,7 @@ namespace Codeathon_Game
 
         protected override void Initialize()
         {
-            Screens = new List<ObjectToDraw>[]{ titlescreen.drawItems, gameview.drawItems, gamecode.drawItems, levelselect.drawItems };
+            Screens = new List<ObjectToDraw>[] { titlescreen.drawItems, gameview.drawItems, gamecode.drawItems, levelselect.drawItems };
             _inputManager = new InputListenerManager();
 
             GAMESTATE = GameState.TITLESCREEN;
@@ -50,7 +54,7 @@ namespace Codeathon_Game
             graphics.PreferredBackBufferHeight = window_height;
             graphics.PreferredBackBufferWidth = window_width;
             graphics.IsFullScreen = false;
-            
+
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Form.FromHandle(Window.Handle);
             form.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 
@@ -111,7 +115,25 @@ namespace Codeathon_Game
 
         protected override void Update(GameTime gameTime)
         {
+            current = Mouse.GetState();
+            if (current.LeftButton == ButtonState.Pressed)
+            {
+                if (previous.LeftButton != ButtonState.Pressed)
+                {
+                    mouse.CheckClick(Screens[(int)GAMESTATE]);
+                }
+            }
+            else
+            {
+                if (mouse.draggedObject != null)
+                {
+                    ((TextShow)mouse.draggedObject).Dock(Screens[(int)GameState.GAMEPLAY_VIEW]);
 
+                    mouse.draggedObject = null;
+                }
+            }
+            mouse.Update();
+            previous = current;
 
             _inputManager.Update(gameTime);
 
@@ -119,25 +141,25 @@ namespace Codeathon_Game
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                     GAMESTATE = GameState.GAMEPLAY_VIEW;
+                    GAMESTATE = GameState.GAMEPLAY_VIEW;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
                     Exit();
                 }
             }
-            else if( GAMESTATE == GameState.GAMEPLAY_CODE)
+            else if (GAMESTATE == GameState.GAMEPLAY_CODE)
             {
                 //TODO fill in code here
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
 
-                    if(DateTime.Now.Millisecond - last_time_switch > 500)
+                    if (DateTime.Now.Millisecond - last_time_switch > 500)
                     {
                         GAMESTATE = GameState.GAMEPLAY_VIEW;
                         last_time_switch = DateTime.Now.Millisecond;
                     }
-                    
+
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -145,17 +167,17 @@ namespace Codeathon_Game
                     GAMESTATE = GameState.TITLESCREEN;
                 }
             }
-            else if(GAMESTATE == GameState.GAMEPLAY_VIEW)
+            else if (GAMESTATE == GameState.GAMEPLAY_VIEW)
             {
-                
+
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                    if(DateTime.Now.Millisecond -last_time_switch > 500)
+                    if (DateTime.Now.Millisecond - last_time_switch > 500)
                     {
                         GAMESTATE = GameState.GAMEPLAY_CODE;
                         last_time_switch = DateTime.Now.Millisecond;
                     }
-                    
+
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -163,7 +185,7 @@ namespace Codeathon_Game
                     GAMESTATE = GameState.TITLESCREEN;
                 }
             }
-            else if(GAMESTATE == GameState.LEVEL_SELECT)
+            else if (GAMESTATE == GameState.LEVEL_SELECT)
             {
                 //TODO fill in code here
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -181,14 +203,14 @@ namespace Codeathon_Game
 
             spriteBatch.Begin();
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
-            
-       
 
-      
-         
+
+
+
+
             foreach (ObjectToDraw curObject in Screens[(int)GAMESTATE])
             {
-               curObject.Draw();
+                curObject.Draw();
             }
             spriteBatch.End();
             base.Draw(gameTime);

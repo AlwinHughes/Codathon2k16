@@ -28,6 +28,7 @@ namespace Codeathon_Game
 
         Color[] border_colors;
         int[] border_widths;
+        BlockData blockData;
 
         bool complex;
         // used for simple creation
@@ -83,27 +84,28 @@ namespace Codeathon_Game
             generateTextureComplex(border_widths, border_colors, inside_color);
         }
 
-        //public TextShow(Vector2 location, blockType type)
-        //   : base(location, (int)Game1.title_font.MeasureString(BlockData.getName(type)).X + 8 + 4 + 4, (int)Game1.title_font.MeasureString(BlockData.getName(type)).Y + 8 + 4 + 4)
-        //{
-        //    blockData = new BlockData(type);
-        //    is_text_show = true;
-        //    font = "title";
-        //    inside_color = Color.Yellow;
-        //    border_colors = blockData.borderColours;
-        //    text_color = blockData.textColour;
-        //    text = blockData.name;
-        //    canBeDraged = true;
-        //    sprite_height = (int)Game1.fonts[font].MeasureString(text).Y;
-        //    sprite_length = (int)Game1.fonts[font].MeasureString(text).X;
+        public TextShow(Vector2 location, blockType type)
+           : base(location, (int)Game.fonts["font16"].MeasureString(BlockData.getName(type)).X + 8 + 4 + 4, (int)Game.fonts["font16"].MeasureString(BlockData.getName(type)).Y + 8 + 4 + 4)
+        {
+            blockData = new BlockData(type);
+            border_widths = new int[] { 4, 4, 4, 4 };
+            
+            font = "title";
+            inside_color = Color.Yellow;
+            border_colors = blockData.borderColours;
+            text_color = blockData.textColour;
+            text = blockData.name;
+            canBeDraged = true;
+            sprite_height = (int)Game.fonts["font16"].MeasureString(text).Y+ border_widths[1]+ border_widths[3];
+            sprite_length = (int)Game.fonts["font16"].MeasureString(text).X +border_widths[0]+ border_widths[2];
 
-        //    data = new Color[width * height];
-        //    data_to_convert = new Color[width, height];
+            data = new Color[width * height];
+            data_to_convert = new Color[width, height];
 
-        //    border_size = 8;
+            
 
-        //    generateTextureComplex(new int[4] { 4, 4, 4, 4 }, border_colors, inside_color);
-        //}
+            generateTextureComplex(new int[4] { 4, 4, 4, 4 }, border_colors, inside_color);
+        }
 
         public void generateTextureComplex(int[] boder_sizes, Color[] border_colors, Color inside_color)
         {
@@ -164,24 +166,7 @@ namespace Codeathon_Game
             
             convertTo1DArray();
         }
-        //public void generateTexture(int border_size, Color inside, Color border, Color text_color)//only alows color change not size change 
-        //{
-        //    for (int i = 0; i < width; i++)
-        //    {
-        //        for (int j = 0; j < height; j++)
-        //        {
-        //            if (i < border_size || i > width - border_size || j < border_size || j > height - border_size)
-        //            {
-        //                data_to_convert[i, j] = border;
-        //            }
-        //            else
-        //            {
-        //                data_to_convert[i, j] = inside;
-        //            }
-        //        }
-        //    }
-        //    convertTo1DArray();
-        //}
+        
 
         private void convertTo1DArray()
         {
@@ -206,6 +191,28 @@ namespace Codeathon_Game
         public void center()
         {
             location = new Vector2(location.X - width / 2, location.Y - height / 2);
+        }
+
+        public void Dock(List<ObjectToDraw> shapes)
+        {
+            foreach (ObjectToDraw shape in shapes)
+            {
+                if (shape is TextShow && ((TextShow)shape).blockData != null)
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        TextShow s = (TextShow)shape;
+                        Vector2[] offsets = new Vector2[2] { new Vector2(0, s.height), new Vector2(s.width, 0) };
+
+                        if (s.blockData.canBeDockedTo[i] && this != s && Game.current.X - offsets[i].X > s.location.X && Game.current.X - offsets[i].X < s.location.X + width && Game.current.Y - offsets[i].Y > s.location.Y && Game.current.Y - offsets[i].Y < s.location.Y + height)
+                        {
+                            dock = shape;
+                            dockOffset = offsets[i];
+                            return;
+                        }
+                    }
+                }
+            }
         }
     }
 }
