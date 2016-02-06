@@ -12,9 +12,19 @@ namespace Codeathon_Game
     {
         GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
+<<<<<<< HEAD
 
         public static Dictionary<string,SpriteFont> fonts;        
 
+=======
+        List<ObjectToDraw>[] OBJECTS = new List<ObjectToDraw>[]
+        {
+            new List<ObjectToDraw>(),//title screen
+            new List<ObjectToDraw>(),//game play view
+            new List<ObjectToDraw>(),//game play code
+            new List<ObjectToDraw>()// level select
+        };
+>>>>>>> a50aba74defb7d0ade43c8f5bd771e3c204092a6
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -73,5 +83,12 @@ namespace Codeathon_Game
 
             base.Draw(gameTime);
         }
+    }
+
+
+
+    public enum GameState
+    {
+        TITLESCREEN, GAMEPLAY_VIEW, GAMEPLAY_CODE, LEVEL_SELECT
     }
 }
