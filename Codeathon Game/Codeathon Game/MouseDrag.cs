@@ -36,7 +36,10 @@ namespace Codeathon_Game
                     }
                 }else if (((TextShow)shape).can_spawn)
                 {
-                    
+                    TextShow temp = new TextShow(new Vector2(shape.location.X + 100, shape.location.Y), ((TextShow)shape).type, true);
+                    temp.dock = null;
+                    offset = new Vector2(Game.current.X - temp.location.X, Game.current.Y);
+                    draggedObject = temp;
                 }
                 
             }

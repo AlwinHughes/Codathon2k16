@@ -26,6 +26,7 @@ namespace Codeathon_Game
         int[] border_widths;
         BlockData blockData;
         public bool can_spawn;
+        public blockType type;
 
 
         bool complex;
@@ -89,8 +90,8 @@ namespace Codeathon_Game
             {
                 can_spawn = true;
             }
+            this.type = type;
             
-            Debug.WriteLine(can_spawn);
             this.canBeDraged = can_be_draged;
             blockData = new BlockData(type);
             border_widths = new int[] { 4, 4, 4, 4 };
