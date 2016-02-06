@@ -41,10 +41,11 @@ namespace Codeathon_Game
 
         public ObjectToDraw(Vector2 location, int width, int height)
         {
+            Debug.WriteLine("work3");
             this.location = location;
             this.width = width;
             this.height = height;
-
+            
         }
 
         virtual public void Draw()
@@ -72,7 +73,6 @@ namespace Codeathon_Game
         public void setData(Color[] data)
         {
             texture.SetData(data);
-            Debug.WriteLine("work?8");
         }
 
     }

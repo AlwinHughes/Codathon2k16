@@ -17,18 +17,15 @@ namespace Codeathon_Game
         string font;
 
         Color inside_color;
-        
         Color text_color;
-
         int sprite_length;
         int sprite_height;
-
         Color[] data;
         Color[,] data_to_convert;
-
         Color[] border_colors;
         int[] border_widths;
         BlockData blockData;
+
 
         bool complex;
         // used for simple creation
@@ -84,13 +81,15 @@ namespace Codeathon_Game
             generateTextureComplex(border_widths, border_colors, inside_color);
         }
 
-        public TextShow(Vector2 location, blockType type)
-           : base(location, (int)Game.fonts["font16"].MeasureString(BlockData.getName(type)).X + 8 + 4 + 4, (int)Game.fonts["font16"].MeasureString(BlockData.getName(type)).Y + 8 + 4 + 4)
+        public TextShow(Vector2 location, blockType type,bool can_be_draged)
+           : base(location, (int)Game.fonts["font32"].MeasureString(BlockData.getName(type)).X + 8 + 4 + 4, (int)Game.fonts["font32"].MeasureString(BlockData.getName(type)).Y + 8 + 4 + 4)
         {
+            Debug.WriteLine("work3");
+            canBeDraged = can_be_draged;
             blockData = new BlockData(type);
             border_widths = new int[] { 4, 4, 4, 4 };
             
-            font = "title";
+            font = "font32";
             inside_color = Color.Yellow;
             border_colors = blockData.borderColours;
             text_color = blockData.textColour;

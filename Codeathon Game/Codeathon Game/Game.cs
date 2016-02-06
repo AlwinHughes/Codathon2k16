@@ -112,10 +112,14 @@ namespace Codeathon_Game
 
             OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Player(new Vector2(100, 200), Content.Load<Texture2D>("images/Body"), Content.Load<Texture2D>("images/Track")));
 
+            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(50, 100), blockType.MOVEFORWARD, false));
+            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(50, 200), blockType.LEFT, false));
+            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(50, 200), blockType.RIGHT, false));
+
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");
             tile = Content.Load<Texture2D>("images/LabTile");
-            
+           
         }
 
         protected override void UnloadContent() { }
