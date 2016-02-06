@@ -29,7 +29,7 @@ namespace Codeathon_Game
 
         public override void Draw()
         {
-            Game.spriteBatch.Draw(texture, location, null,new Rectangle(a,0,64,64), new Vector2(texture.Width / 2, texture.Height / 2), rotation, Vector2.One, Color.White, SpriteEffects.None, 0);
+            Game.spriteBatch.Draw(texture, location, null,new Rectangle((int)state * 64,0,64,64), new Vector2(texture.Width / 2, texture.Height / 2), rotation, Vector2.One, Color.White, SpriteEffects.None, 0);
         }
 
         public override void Update()
