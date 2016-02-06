@@ -25,6 +25,7 @@ namespace Codeathon_Game
         };
 
         Texture2D key, Lock;
+        Texture2D tile;
 
         public Game()
         {
@@ -80,10 +81,11 @@ namespace Codeathon_Game
             ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).center();
             ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
 
-
+            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Player(new Vector2(100, 200), Content.Load<Texture2D>("images/Body"), Content.Load<Texture2D>("images/Track")));
 
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");
+            tile = Content.Load<Texture2D>("images/LabTile");
         }
 
         protected override void UnloadContent() { }
@@ -97,6 +99,11 @@ namespace Codeathon_Game
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 GAMESTATE = GameState.GAMEPLAY_VIEW;
+            }
+
+            foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
+            {
+                curObject.Update();
             }
 
             base.Update(gameTime);
