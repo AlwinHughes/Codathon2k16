@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework;
 namespace Codeathon_Game
 {
     [Serializable]
-    class ObjectToDrawBase
+    class ObjectToDraw
     {
         public Texture2D texture;
         public Vector2 location;
@@ -20,10 +20,10 @@ namespace Codeathon_Game
         public int height { get; private set; }
         public bool canBeDraged;
 
-        public ObjectToDrawBase dock;
+        public ObjectToDraw dock;
         public Vector2 dockOffset;
 
-        public ObjectToDrawBase(Texture2D texture, Vector2 location)
+        public ObjectToDraw(Texture2D texture, Vector2 location)
         {
             this.location = location;
             this.texture = texture;
@@ -31,7 +31,7 @@ namespace Codeathon_Game
             height = texture.Height;
         }
 
-        public ObjectToDrawBase(GraphicsDevice d, Vector2 location, int width, int height)
+        public ObjectToDraw(GraphicsDevice d, Vector2 location, int width, int height)
         {
             this.location = location;
             this.width = width;
@@ -39,7 +39,7 @@ namespace Codeathon_Game
             texture = new Texture2D(d, this.width, this.height);
         }
 
-        public ObjectToDrawBase(Vector2 location, int width, int height)
+        public ObjectToDraw(Vector2 location, int width, int height)
         {
             this.location = location;
             this.width = width;

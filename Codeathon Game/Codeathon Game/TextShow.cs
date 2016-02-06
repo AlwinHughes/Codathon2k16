@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework;
 
 namespace Codeathon_Game
 {
-    class TextShow : ObjectToDrawBase
+    class TextShow : ObjectToDraw
     {
 
         string text;

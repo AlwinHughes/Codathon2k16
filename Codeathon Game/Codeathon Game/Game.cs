@@ -16,12 +16,12 @@ namespace Codeathon_Game
 
         public static Dictionary<string, SpriteFont> fonts;
 
-        List<ObjectToDrawBase>[] OBJECTS = new List<ObjectToDrawBase>[]
+        List<ObjectToDraw>[] OBJECTS = new List<ObjectToDraw>[]
         {
-            new List<ObjectToDrawBase>(),//title screen
-            new List<ObjectToDrawBase>(),//game play view
-            new List<ObjectToDrawBase>(),//game play code
-            new List<ObjectToDrawBase>()// level select
+            new List<ObjectToDraw>(),//title screen
+            new List<ObjectToDraw>(),//game play view
+            new List<ObjectToDraw>(),//game play code
+            new List<ObjectToDraw>()// level select
         };
 
         Texture2D key, Lock;
@@ -81,7 +81,7 @@ namespace Codeathon_Game
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
             spriteBatch.End();
 
-            foreach (ObjectToDrawBase curObject in OBJECTS[(int)GAMESTATE])
+            foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
             {
                 curObject.Draw();
             }
