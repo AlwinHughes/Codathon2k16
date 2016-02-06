@@ -31,7 +31,6 @@ namespace Codeathon_Game
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
-
         
         protected override void Initialize()
         {
@@ -81,9 +80,9 @@ namespace Codeathon_Game
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
             spriteBatch.End();
 
-            foreach(ObjectToDrawBase draw in OBJECTS[(int)GAMESTATE])
+            foreach(ObjectToDrawBase curObject in OBJECTS[(int)GAMESTATE])
             {
-                draw.Draw();
+                curObject.Draw();
             }
 
             base.Draw(gameTime);

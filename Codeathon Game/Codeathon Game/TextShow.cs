@@ -12,7 +12,6 @@ namespace Codeathon_Game
 {
     class TextShow : ObjectToDrawBase
     {
-
         string text;
         string font;
 
@@ -34,8 +33,7 @@ namespace Codeathon_Game
 
         public TextShow(Vector2 location, int border_size, Color inside_color, Color border_color, string font, string text, Color text_color, bool can_be_draged)
            : base(location, (int)Game.fonts[font].MeasureString(text).X + 8 + border_size, (int)Game.fonts[font].MeasureString(text).Y + 8 + border_size)
-        {
-            
+        {       
             complex = false;
             this.font = font;
             this.inside_color = inside_color;
@@ -51,15 +49,12 @@ namespace Codeathon_Game
             data_to_convert = new Color[width, height];
 
             generateTexture(border_size, inside_color, border_color, text_color);
-
         }
 
         //constructur used for complex creation
         public TextShow(Vector2 location, Color inside_color, Color[] border_colors, int[] border_widths, string font, string text, Color text_color, bool canBeDraged)
             : base(location, (int)Game.fonts[font].MeasureString(text).X + 8 + border_widths[0] + border_widths[2], (int)Game.fonts[font].MeasureString(text).Y + 8 + border_widths[1] + border_widths[3])
-
         {
-            
             complex = true;
             this.font = font;
             this.inside_color = inside_color;
