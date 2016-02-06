@@ -108,20 +108,14 @@ namespace Codeathon_Game
 
 
             key = Content.Load<Texture2D>("images/key");
-            Lock = Content.Load<Texture2D>("images/LockedBlock");
-<<<<<<< HEAD
-            
-           
+            Lock = Content.Load<Texture2D>("images/LockedBlock");            
 
             Texture2D wall = Content.Load<Texture2D>("images/Wall");
-             OBJECTS[(int)GameState.GAMEPLAY_VIEW].AddRange(Levels.loadLevel(wall));
+            ((TextShow)Screens[(int)GameState.GAMEPLAY_VIEW].AddRange(Levels.loadLevel(wall));
 
 
             key = Content.Load<Texture2D>("images/key");
-            Lock = Content.Load<Texture2D>("images/LockedBlock");            
-
-=======
->>>>>>> b99536c72311dbfaffc10c46ecccc43f06427412
+            Lock = Content.Load<Texture2D>("images/LockedBlock");    
         }
 
         protected override void UnloadContent() { }
