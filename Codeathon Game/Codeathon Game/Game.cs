@@ -17,7 +17,7 @@ namespace Codeathon_Game
 
 
         int window_height;
-        int wnidow_width;
+        int window_width;
         GameState GAMESTATE;
 
         public static Dictionary<string,SpriteFont> fonts;        
@@ -43,14 +43,13 @@ namespace Codeathon_Game
         protected override void Initialize()
         {
             GAMESTATE = GameState.TITLESCREEN;
-            wnidow_width = graphics.GraphicsDevice.DisplayMode.Width;
+            window_width = graphics.GraphicsDevice.DisplayMode.Width;
             window_height = graphics.GraphicsDevice.DisplayMode.Height;
             graphics.PreferredBackBufferHeight = window_height;
-            graphics.PreferredBackBufferWidth = wnidow_width;
+            graphics.PreferredBackBufferWidth = window_width;
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
             IsMouseVisible = true;
-
 
             base.Initialize();
         }
