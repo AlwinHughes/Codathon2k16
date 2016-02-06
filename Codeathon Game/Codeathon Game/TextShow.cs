@@ -33,7 +33,7 @@ namespace Codeathon_Game
         bool complex;
 
         public TextShow(Vector2 location, int border_size, Color inside_color, Color border_color, string font, string text, Color text_color, bool can_be_draged)
-           : base(location, (int)Game.fonts[font].MeasureString(text).X + 8 + border_size, (int)Game1.fonts[font].MeasureString(text).Y + 8 + border_size)
+           : base(location, (int)Game.fonts[font].MeasureString(text).X + 8 + border_size, (int)Game.fonts[font].MeasureString(text).Y + 8 + border_size)
         {
             
             complex = false;
@@ -56,7 +56,7 @@ namespace Codeathon_Game
 
         //constructur used for complex creation
         public TextShow(Vector2 location, Color inside_color, Color[] border_colors, int[] border_widths, string font, string text, Color text_color, bool canBeDraged)
-            : base(location, (int)Game.fonts[font].MeasureString(text).X + 8 + border_widths[0] + border_widths[2], (int)Game1.fonts[font].MeasureString(text).Y + 8 + border_widths[1] + border_widths[3])
+            : base(location, (int)Game.fonts[font].MeasureString(text).X + 8 + border_widths[0] + border_widths[2], (int)Game.fonts[font].MeasureString(text).Y + 8 + border_widths[1] + border_widths[3])
 
         {
             
@@ -68,8 +68,8 @@ namespace Codeathon_Game
             this.text = text;
             this.canBeDraged = canBeDraged;
             this.border_widths = border_widths;
-            sprite_height = (int)Game1.fonts[font].MeasureString(text).Y;
-            sprite_length = (int)Game1.fonts[font].MeasureString(text).X;
+            sprite_height = (int)Game.fonts[font].MeasureString(text).Y;
+            sprite_length = (int)Game.fonts[font].MeasureString(text).X;
 
             border_size = border_widths[0];
 
