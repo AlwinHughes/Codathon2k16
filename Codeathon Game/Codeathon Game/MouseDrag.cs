@@ -32,8 +32,8 @@ namespace Codeathon_Game
                             draggedObject = shape;
                             draggedObject.dock = null;
                             offset = new Vector2(Game.current.X - shape.location.X, Game.current.Y - shape.location.Y);
-                            //why alwin why shapes.Remove(pair.Key);
-                            //shapes.Add(pair.Key, pair.Value);
+                            //shapes.Remove(pair.Key);
+                            //s//hapes.Add(pair.Key, pair.Value);
                             return;
                         }
                     }
