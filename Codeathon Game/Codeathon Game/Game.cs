@@ -12,11 +12,9 @@ namespace Codeathon_Game
     {
         GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
-<<<<<<< HEAD
 
         public static Dictionary<string,SpriteFont> fonts;        
 
-=======
         List<ObjectToDraw>[] OBJECTS = new List<ObjectToDraw>[]
         {
             new List<ObjectToDraw>(),//title screen
@@ -24,7 +22,7 @@ namespace Codeathon_Game
             new List<ObjectToDraw>(),//game play code
             new List<ObjectToDraw>()// level select
         };
->>>>>>> a50aba74defb7d0ade43c8f5bd771e3c204092a6
+
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
