@@ -11,8 +11,8 @@ namespace Codeathon_Game
 {
     class Shape: ObjectToDraw
     {
-        public Shape(Texture2D texture, Vector2 location, int width, int height)
-            : base(texture, location, width, height)
+        public Shape(Texture2D texture, Vector2 location)
+            : base(texture, location)
         {
 
         }
