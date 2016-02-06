@@ -46,6 +46,7 @@ namespace Codeathon_Game
 
             Window.IsBorderless = true;
 
+
             graphics.ApplyChanges();
             IsMouseVisible = true;
 
