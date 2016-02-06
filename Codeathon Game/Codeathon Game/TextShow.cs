@@ -166,24 +166,7 @@ namespace Codeathon_Game
             
             convertTo1DArray();
         }
-        //public void generateTexture(int border_size, Color inside, Color border, Color text_color)//only alows color change not size change 
-        //{
-        //    for (int i = 0; i < width; i++)
-        //    {
-        //        for (int j = 0; j < height; j++)
-        //        {
-        //            if (i < border_size || i > width - border_size || j < border_size || j > height - border_size)
-        //            {
-        //                data_to_convert[i, j] = border;
-        //            }
-        //            else
-        //            {
-        //                data_to_convert[i, j] = inside;
-        //            }
-        //        }
-        //    }
-        //    convertTo1DArray();
-        //}
+        
 
         private void convertTo1DArray()
         {
