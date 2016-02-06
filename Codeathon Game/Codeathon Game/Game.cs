@@ -111,7 +111,7 @@ namespace Codeathon_Game
             Lock = Content.Load<Texture2D>("images/LockedBlock");            
 
             Texture2D wall = Content.Load<Texture2D>("images/Wall");
-            ((TextShow)Screens[(int)GameState.GAMEPLAY_VIEW].AddRange(Levels.loadLevel(wall));
+            Screens[(int)GameState.GAMEPLAY_VIEW].AddRange(Levels.loadLevel(wall));
 
 
             key = Content.Load<Texture2D>("images/key");
