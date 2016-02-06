@@ -105,7 +105,7 @@ namespace Codeathon_Game
             ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).center();
             ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
 
-            //eh e
+            //eh eh
 
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");            
