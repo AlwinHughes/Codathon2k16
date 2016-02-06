@@ -147,9 +147,9 @@ namespace Codeathon_Game
 
             if (GAMESTATE == GameState.TITLESCREEN)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                if (Keyboard.GetState().IsKeyDown(Keys.I))
                 {
-                     GAMESTATE = GameState.GAMEPLAY_VIEW;
+                     GAMESTATE = GameState.GAMEPLAY_CODE;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
@@ -159,15 +159,11 @@ namespace Codeathon_Game
             else if( GAMESTATE == GameState.GAMEPLAY_CODE)
             {
                 //TODO fill in code here
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                if (Keyboard.GetState().IsKeyDown(Keys.O))
                 {
 
-                    if(DateTime.Now.Millisecond - last_time_switch > 500)
-                    {
-                        GAMESTATE = GameState.GAMEPLAY_VIEW;
-                        last_time_switch = DateTime.Now.Millisecond;
-                    }
-                    
+                     GAMESTATE = GameState.GAMEPLAY_VIEW;
+
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -178,13 +174,12 @@ namespace Codeathon_Game
             else if(GAMESTATE == GameState.GAMEPLAY_VIEW)
             {
                 
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                if (Keyboard.GetState().IsKeyDown(Keys.I))
                 {
-                    if(DateTime.Now.Millisecond -last_time_switch > 500)
-                    {
+                    
                         GAMESTATE = GameState.GAMEPLAY_CODE;
                         last_time_switch = DateTime.Now.Millisecond;
-                    }
+                    
                     
                 }
 
