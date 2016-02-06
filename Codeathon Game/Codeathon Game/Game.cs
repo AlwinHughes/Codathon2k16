@@ -203,7 +203,7 @@ namespace Codeathon_Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront);
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
 
 

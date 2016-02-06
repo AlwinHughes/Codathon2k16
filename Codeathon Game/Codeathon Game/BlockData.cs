@@ -12,7 +12,7 @@ namespace Codeathon_Game
 {
     enum blockType
     {
-        START, STOP, IF, FOR, WHILE, END, NOT, TRUE, FALSE, DATA, MOVEFORWARD
+        START, STOP, IF, FOR, WHILE, END, NOT, TRUE, FALSE, DATA, MOVEFORWARD,NONE,LEFT,RIGHT
     }
 
     class BlockData
@@ -27,7 +27,9 @@ namespace Codeathon_Game
 
         public static string getName(blockType type)
         {
+            
             BlockData t = new BlockData(type);
+            
             return t.name;
         }
 
@@ -36,6 +38,18 @@ namespace Codeathon_Game
             this.type = type;
             switch (this.type)
             {
+                case blockType.LEFT:
+                    name = "TURN LEFT";
+                    canBeDockedTo = new bool[] { true, false };
+                    borderColours = new Color[4] { insideColour, insideColour, insideColour, Color.Green };
+                    textColour = Color.CadetBlue;
+                    break;
+                case blockType.RIGHT:
+                    name = "TURN RIGHT";
+                    canBeDockedTo = new bool[] { true, false };
+                    borderColours = new Color[4] { insideColour, insideColour, insideColour, Color.Green };
+                    textColour = Color.CadetBlue;
+                    break;
                 case blockType.START:
                     name = "START";
                     canBeDockedTo = new bool[2] { true, false };

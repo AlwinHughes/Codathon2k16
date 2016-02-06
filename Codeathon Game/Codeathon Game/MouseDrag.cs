@@ -34,7 +34,11 @@ namespace Codeathon_Game
                         //shapes.Add(pair.Key, pair.Value);
                         return;
                     }
+                }else if (((TextShow)shape).can_spawn)
+                {
+                    
                 }
+                
             }
         }
 
