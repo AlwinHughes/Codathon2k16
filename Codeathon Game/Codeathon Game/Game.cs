@@ -15,7 +15,7 @@ namespace Codeathon_Game
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "Content";//eh
         }
 
         /// <summary>
