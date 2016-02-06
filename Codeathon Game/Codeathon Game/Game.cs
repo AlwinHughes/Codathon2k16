@@ -64,11 +64,22 @@ namespace Codeathon_Game
             fonts.Add("font40", Content.Load<SpriteFont>("fonts/font40"));
             fonts.Add("fontText", Content.Load<SpriteFont>("fonts/fontText"));
 
-            OBJECTS[(int)GAMESTATE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font40", "TITLE!!!!!!!!", Color.Black, false));
-            ((TextShow)OBJECTS[(int)GAMESTATE][0]).center();
-            OBJECTS[(int)GAMESTATE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Press Space", Color.Black, false));
-            ((TextShow)OBJECTS[(int)GAMESTATE][1]).center();
-            ((TextShow)OBJECTS[(int)GAMESTATE][1]).location.Y += 100;
+            OBJECTS[(int)GameState.TITLESCREEN].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font40", "TITLE!!!!!!!!", Color.Black, false));
+            ((TextShow)OBJECTS[(int)GameState.TITLESCREEN][0]).center();
+
+            OBJECTS[(int)GameState.TITLESCREEN].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Press Space", Color.Black, false));
+            ((TextShow)OBJECTS[(int)GameState.TITLESCREEN][1]).center();
+            ((TextShow)OBJECTS[(int)GameState.TITLESCREEN][1]).location.Y += 100;
+
+            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Play Level", Color.Black, false));
+            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_VIEW][0]).center();
+            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_VIEW][0]).location.Y = 5;
+            
+
+            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Play Level", Color.Black, false));
+            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).center();
+            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
+
 
 
             key = Content.Load<Texture2D>("images/key");
@@ -82,6 +93,10 @@ namespace Codeathon_Game
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                GAMESTATE = GameState.GAMEPLAY_VIEW;
             }
 
             base.Update(gameTime);
