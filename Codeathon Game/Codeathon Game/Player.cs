@@ -16,7 +16,7 @@ namespace Codeathon_Game
         Vector2 moveGoal;
         bool canMove;
 
-        float rotateGoal;
+        int rotateGoal;
         bool canSpin;
 
         int cd; //input cooldown
@@ -57,21 +57,19 @@ namespace Codeathon_Game
                 cd--;
             }
             //rotate towards goal
-            if (canSpin)
+
+
+
+
+            if (rotation < 0)
             {
-                if (Math.Ceiling(rotation) == rotateGoal)
-                {
-                    canSpin = false;
-                }
-                else if (rotation < rotateGoal)
-                {
-                    rotation += (float)Math.PI;
-                }
-                else if (rotation > rotateGoal)
-                {
-                    rotation -= (float)Math.PI;
-                }
+                rotation += (float)Math.PI;
             }
+            else if (rotation > 0)
+            {
+                rotation -= (float)Math.PI;
+            }
+
             //move towards goal
 
             //move
@@ -79,12 +77,12 @@ namespace Codeathon_Game
 
         public void TurnRight()
         {
-            rotateGoal += (float)Math.PI / 2;
+            rotateGoal += 5;
         }
 
         public void TurnLeft()
         {
-            rotateGoal -= (float)Math.PI / 2;
+            rotateGoal -= 5;
         }
 
         public void MoveForward()

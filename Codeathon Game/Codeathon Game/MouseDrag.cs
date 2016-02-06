@@ -23,26 +23,30 @@ namespace Codeathon_Game
             foreach ( ObjectToDraw pair in shapes)
             {
                 ObjectToDraw shape = pair;
-                if (shape.canBeDraged)
+                if (shape is TextShow)
                 {
-                    if (Game.current.X > shape.location.X && Game.current.X < shape.location.X + shape.width && Game.current.Y > shape.location.Y && Game.current.Y < shape.location.Y + shape.height)
+                    if (shape.canBeDraged)
                     {
-                        draggedObject = shape;
-                        draggedObject.dock = null;
-                        offset = new Vector2(Game.current.X - shape.location.X, Game.current.Y - shape.location.Y);
-                        //why alwin why shapes.Remove(pair.Key);
-                        //shapes.Add(pair.Key, pair.Value);
+                        if (Game.current.X > shape.location.X && Game.current.X < shape.location.X + shape.width && Game.current.Y > shape.location.Y && Game.current.Y < shape.location.Y + shape.height)
+                        {
+                            draggedObject = shape;
+                            draggedObject.dock = null;
+                            offset = new Vector2(Game.current.X - shape.location.X, Game.current.Y - shape.location.Y);
+                            //why alwin why shapes.Remove(pair.Key);
+                            //shapes.Add(pair.Key, pair.Value);
+                            return;
+                        }
+                    }
+                    else if (((TextShow)shape).can_spawn)
+                    {
+                        TextShow temp = new TextShow(new Vector2(current.X, current.Y), ((TextShow)shape).type, true);
+                        temp.can_spawn = false;
+                        temp.dock = null;
+                        offset = new Vector2(Game.current.X - temp.location.X, Game.current.Y);
+                        draggedObject = temp;
+                        shapes.Add(temp);
                         return;
                     }
-                }else if (((TextShow)shape).can_spawn)
-                {
-                    TextShow temp = new TextShow(new Vector2(current.X, current.Y), ((TextShow)shape).type, true);
-                    temp.can_spawn = false;
-                    temp.dock = null;
-                    offset = new Vector2(Game.current.X - temp.location.X, Game.current.Y);
-                    draggedObject = temp;
-                    shapes.Add(temp);
-                    return;
                 }
                 
             }
