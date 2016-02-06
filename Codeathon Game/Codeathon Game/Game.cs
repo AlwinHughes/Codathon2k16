@@ -19,7 +19,6 @@ namespace Codeathon_Game
         public static MouseState current;
         MouseState previous;
 
-
         Screens.TitleScreen titlescreen = new Screens.TitleScreen();
         Screens.GamePlay gameplay = new Screens.GamePlay();
         Screens.GameView gameview = new Screens.GameView();
@@ -64,12 +63,6 @@ namespace Codeathon_Game
             graphics.ApplyChanges();
             IsMouseVisible = true;
 
-        
-
-            //HERE BE BOOTY
-           
-
-
             base.Initialize();
         }
 
@@ -105,12 +98,15 @@ namespace Codeathon_Game
             ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).center();
             ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
 
+<<<<<<< HEAD
 
             gamecode.drawItems.Add(new TextShow(new Vector2(50, 100), blockType.MOVEFORWARD, false));
             gamecode.drawItems.Add(new TextShow(new Vector2(50, 200), blockType.RIGHT, false));
             gamecode.drawItems.Add(new TextShow(new Vector2(50, 300), blockType.LEFT, false));
             //eh eh
 
+=======
+>>>>>>> fae39d4e9fefca4b67ad4ad717c74434aaa45f55
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");            
 
