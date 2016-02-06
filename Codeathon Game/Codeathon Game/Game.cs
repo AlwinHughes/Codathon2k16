@@ -105,6 +105,7 @@ namespace Codeathon_Game
             gamecode.drawItems.Add(new TextShow(new Vector2(50, 300), blockType.LEFT, false));
             //eh eh
 
+            Screens[(int)GameState.GAMEPLAY_VIEW].Add(new Player(new Vector2(100,100), Content.Load<Texture2D>("images/body"),Content.Load<Texture2D>("images/track")));
 
 
             key = Content.Load<Texture2D>("images/key");

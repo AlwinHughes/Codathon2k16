@@ -64,10 +64,12 @@ namespace Codeathon_Game
             if (rotation < 0)
             {
                 rotation += (float)Math.PI;
+                rotateGoal++;
             }
             else if (rotation > 0)
             {
                 rotation -= (float)Math.PI;
+                rotateGoal--;
             }
 
             //move towards goal
