@@ -195,6 +195,7 @@ namespace Codeathon_Game
             Game.spriteBatch.Draw(texture, new Rectangle((int)location.X, (int)location.Y, texture.Width, texture.Height), Color.White);
             Game.spriteBatch.DrawString(Game.fonts[font], text, new Vector2(location.X + border_widths[0], location.Y + border_widths[1]), text_color);
         }     
+
         public void center()
         {
             location = new Vector2(location.X - width / 2, location.Y - height / 2);
