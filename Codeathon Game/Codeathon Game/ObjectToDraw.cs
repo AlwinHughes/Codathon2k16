@@ -18,13 +18,14 @@ namespace Codeathon_Game
         public float rotation;
         public int width { get; private set; }
         public int height { get; private set; }
-        public bool canBeDraged;
-
+        public bool canBeDraged = false;
+        
         public ObjectToDraw dock;
         public Vector2 dockOffset;
 
         public ObjectToDraw(Texture2D texture, Vector2 location)
         {
+            canBeDraged = false;
             this.location = location;
             this.texture = texture;
             width = texture.Width;
@@ -33,6 +34,7 @@ namespace Codeathon_Game
 
         public ObjectToDraw(GraphicsDevice d, Vector2 location, int width, int height)
         {
+            canBeDraged = false;
             this.location = location;
             this.width = width;
             this.height = height;
@@ -41,7 +43,7 @@ namespace Codeathon_Game
 
         public ObjectToDraw(Vector2 location, int width, int height)
         {
-            Debug.WriteLine("work3");
+            
             this.location = location;
             this.width = width;
             this.height = height;

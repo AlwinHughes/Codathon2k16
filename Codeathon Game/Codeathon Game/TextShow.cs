@@ -25,6 +25,7 @@ namespace Codeathon_Game
         Color[] border_colors;
         int[] border_widths;
         BlockData blockData;
+        public bool can_spawn;
 
 
         bool complex;
@@ -84,8 +85,13 @@ namespace Codeathon_Game
         public TextShow(Vector2 location, blockType type,bool can_be_draged)
            : base(location, (int)Game.fonts["font32"].MeasureString(BlockData.getName(type)).X + 8 + 4 + 4, (int)Game.fonts["font32"].MeasureString(BlockData.getName(type)).Y + 8 + 4 + 4)
         {
-            Debug.WriteLine("work3");
-            canBeDraged = can_be_draged;
+            if (!can_be_draged)
+            {
+                can_spawn = true;
+            }
+            
+            Debug.WriteLine(can_spawn);
+            this.canBeDraged = can_be_draged;
             blockData = new BlockData(type);
             border_widths = new int[] { 4, 4, 4, 4 };
             
@@ -94,7 +100,6 @@ namespace Codeathon_Game
             border_colors = blockData.borderColours;
             text_color = blockData.textColour;
             text = blockData.name;
-            canBeDraged = true;
             sprite_height = (int)Game.fonts["font16"].MeasureString(text).Y+ border_widths[1]+ border_widths[3];
             sprite_length = (int)Game.fonts["font16"].MeasureString(text).X +border_widths[0]+ border_widths[2];
 
