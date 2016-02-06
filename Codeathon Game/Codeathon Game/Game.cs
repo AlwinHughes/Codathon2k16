@@ -112,11 +112,13 @@ namespace Codeathon_Game
 
             OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Player(new Vector2(100, 200), Content.Load<Texture2D>("images/Body"), Content.Load<Texture2D>("images/Track")));
 
-            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Tile(new Vector2(0,0),Tile.WallState.STRAIGHT,0));
+            Texture2D wall = Content.Load<Texture2D>("images/Wall");
+
+            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Tile(new Vector2(0,0),Tile.WallState.STRAIGHT,0,wall));
 
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");
-            tile = Content.Load<Texture2D>("images/LabTile");
+            //tile = Content.Load<Texture2D>("images/LabTile");
             
         }
 
@@ -131,6 +133,7 @@ namespace Codeathon_Game
                 if (previous.LeftButton != ButtonState.Pressed)
                 {
                     mouse.CheckClick(OBJECTS[(int)GAMESTATE]);
+                    
                 }
             }
             else

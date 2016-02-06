@@ -19,8 +19,8 @@ namespace Codeathon_Game
         
         WallState state;
 
-        public Tile(Vector2 location,  WallState state, int wall_roation)
-            : base(location, 64, 64)
+        public Tile(Vector2 location,  WallState state, int wall_roation,Texture2D wall)
+            : base(wall, new Vector2(64,64))
         {
             this.state = state;
             this.location = location;
@@ -29,7 +29,7 @@ namespace Codeathon_Game
 
         public override void Draw()
         {
-
+            Game.spriteBatch.Draw(texture, location, null,new Rectangle(a,0,64,64), new Vector2(texture.Width / 2, texture.Height / 2), rotation, Vector2.One, Color.White, SpriteEffects.None, 0);
         }
 
         public override void Update()
