@@ -15,9 +15,13 @@ namespace Codeathon_Game
         GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
 
+
         int window_height;
         int wnidow_width;
         GameState GAMESTATE;
+
+        public static Dictionary<string,SpriteFont> fonts;        
+
 
         List<ObjectToDraw>[] OBJECTS = new List<ObjectToDraw>[]
         {
@@ -26,6 +30,7 @@ namespace Codeathon_Game
             new List<ObjectToDraw>(),//game play code
             new List<ObjectToDraw>()// level select
         };
+
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -53,6 +58,12 @@ namespace Codeathon_Game
         {
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            fonts = new Dictionary<string, SpriteFont>();
+
+            fonts.Add("font16", Content.Load<SpriteFont>("fonts/font16"));
+            fonts.Add("font24", Content.Load<SpriteFont>("fonts/font24"));
+            fonts.Add("font32", Content.Load<SpriteFont>("fonts/font32"));
+            fonts.Add("font40", Content.Load<SpriteFont>("fonts/font40"));
 
            
         }
@@ -75,6 +86,14 @@ namespace Codeathon_Game
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            spriteBatch.Begin();
+            spriteBatch.DrawString(fonts["font16"], "HELLO BOSS 16", new Vector2(50, 50), Color.Black);
+            spriteBatch.DrawString(fonts["font24"], "HELLO BOSS 24", new Vector2(50, 100), Color.Black);
+            spriteBatch.DrawString(fonts["font32"], "HELLO BOSS 32", new Vector2(50, 150), Color.Black);
+            spriteBatch.DrawString(fonts["font40"], "HELLO BOSS 40", new Vector2(50, 200), Color.Black);
+            spriteBatch.End();
+            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }

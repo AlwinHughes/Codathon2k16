@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AnimShape.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="ObjectToDraw.cs" />
     <Compile Include="Program.cs" />
