@@ -40,9 +40,11 @@ namespace Codeathon_Game
             graphics.PreferredBackBufferHeight = window_height;
             graphics.PreferredBackBufferWidth = window_width;
             graphics.IsFullScreen = false;
-
+            
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Form.FromHandle(Window.Handle);
             form.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+
+            Window.IsBorderless = true;
 
             graphics.ApplyChanges();
             IsMouseVisible = true;
