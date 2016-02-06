@@ -33,7 +33,7 @@ namespace Codeathon_Game
 
         public TextShow(Vector2 location, int border_size, Color inside_color, Color border_color, string font, string text, Color text_color, bool can_be_draged)
            : base(location, (int)Game.fonts[font].MeasureString(text).X + 8 + border_size, (int)Game.fonts[font].MeasureString(text).Y + 8 + border_size)
-        {       
+        {
             complex = false;
             this.font = font;
             this.inside_color = inside_color;
@@ -197,7 +197,7 @@ namespace Codeathon_Game
             return new Vector2(4 + border_size + sprite_length / 2, 4 + border_size + sprite_height / 2);
         }
 
-       
+
 
     }
 }

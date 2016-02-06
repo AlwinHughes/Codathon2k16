@@ -14,7 +14,7 @@ namespace Codeathon_Game
         int window_width;
         GameState GAMESTATE;
 
-        public static Dictionary<string,SpriteFont> fonts;
+        public static Dictionary<string, SpriteFont> fonts;
 
         List<ObjectToDrawBase>[] OBJECTS = new List<ObjectToDrawBase>[]
         {
@@ -31,7 +31,7 @@ namespace Codeathon_Game
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
-        
+
         protected override void Initialize()
         {
             GAMESTATE = GameState.TITLESCREEN;
@@ -60,8 +60,8 @@ namespace Codeathon_Game
             key = Content.Load<Texture2D>("images/key");
         }
 
-        protected override void UnloadContent(){}
-        
+        protected override void UnloadContent() { }
+
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -80,7 +80,7 @@ namespace Codeathon_Game
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
             spriteBatch.End();
 
-            foreach(ObjectToDrawBase curObject in OBJECTS[(int)GAMESTATE])
+            foreach (ObjectToDrawBase curObject in OBJECTS[(int)GAMESTATE])
             {
                 curObject.Draw();
             }
