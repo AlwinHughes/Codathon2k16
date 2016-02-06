@@ -11,36 +11,28 @@ namespace Codeathon_Game
     public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static SpriteBatch spriteBatch;
 
         public static Dictionary<string,SpriteFont> fonts;        
 
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";//eh
+            Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
+        
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
 
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
+        
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
             fonts = new Dictionary<string, SpriteFont>();
 
@@ -49,41 +41,29 @@ namespace Codeathon_Game
             fonts.Add("font32", Content.Load<SpriteFont>("fonts/font32"));
             fonts.Add("font40", Content.Load<SpriteFont>("fonts/font40"));
 
-            // TODO: use this.Content to load your game content here
+           
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
+        
+        protected override void UnloadContent(){}
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            
 
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+<<<<<<< HEAD
             spriteBatch.Begin();
             spriteBatch.DrawString(fonts["font16"], "HELLO BOSS 16", new Vector2(50, 50), Color.Black);
             spriteBatch.DrawString(fonts["font24"], "HELLO BOSS 24", new Vector2(50, 100), Color.Black);
@@ -92,6 +72,8 @@ namespace Codeathon_Game
             spriteBatch.End();
             // TODO: Add your drawing code here
 
+=======
+>>>>>>> 12234bf3f62d47c17e676ddf8613920e5a6e7d65
             base.Draw(gameTime);
         }
     }
