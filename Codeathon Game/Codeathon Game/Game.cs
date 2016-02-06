@@ -1,7 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.InputListeners;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Codeathon_Game
 {
@@ -10,9 +13,14 @@ namespace Codeathon_Game
         static public GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
 
+
+        private InputListenerManager _inputManager;
+
+
         int window_height;
         int window_width;
         GameState GAMESTATE;
+        int last_time_switch =0;
 
         public static Dictionary<string, SpriteFont> fonts;
 
@@ -25,8 +33,12 @@ namespace Codeathon_Game
         };
 
         Texture2D key, Lock;
+<<<<<<< HEAD
         Texture2D tile;
 
+=======
+        
+>>>>>>> bdbca69d32842b341df4e06f21b124e7d643fcdb
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -35,6 +47,8 @@ namespace Codeathon_Game
 
         protected override void Initialize()
         {
+            _inputManager = new InputListenerManager();
+
             GAMESTATE = GameState.TITLESCREEN;
             window_width = graphics.GraphicsDevice.DisplayMode.Width;
             window_height = graphics.GraphicsDevice.DisplayMode.Height;
@@ -50,6 +64,16 @@ namespace Codeathon_Game
 
             graphics.ApplyChanges();
             IsMouseVisible = true;
+
+            var keyboardListener = _inputManager.AddListener(new KeyboardListenerSettings());
+
+            //HERE BE BOOTY
+            keyboardListener.KeyPressed += (sender, args) =>
+            {
+                if (args.Key == Keys.Space)
+                    Debug.WriteLine("Space Pressed");
+            };
+
 
             base.Initialize();
         }
@@ -77,7 +101,7 @@ namespace Codeathon_Game
             ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_VIEW][0]).location.Y = 5;
             
 
-            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Play Level", Color.Black, false));
+            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Progarm Level", Color.Black, false));
             ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).center();
             ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
 
@@ -92,13 +116,65 @@ namespace Codeathon_Game
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+
+
+            _inputManager.Update(gameTime);
+
+            if (GAMESTATE == GameState.TITLESCREEN)
             {
-                Exit();
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                     GAMESTATE = GameState.GAMEPLAY_VIEW;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    Exit();
+                }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            else if( GAMESTATE == GameState.GAMEPLAY_CODE)
             {
-                GAMESTATE = GameState.GAMEPLAY_VIEW;
+                //TODO fill in code here
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+
+                    if(DateTime.Now.Millisecond - last_time_switch > 500)
+                    {
+                        GAMESTATE = GameState.GAMEPLAY_VIEW;
+                        last_time_switch = DateTime.Now.Millisecond;
+                    }
+                    
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    GAMESTATE = GameState.TITLESCREEN;
+                }
+            }
+            else if(GAMESTATE == GameState.GAMEPLAY_VIEW)
+            {
+                
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    if(DateTime.Now.Millisecond -last_time_switch > 500)
+                    {
+                        GAMESTATE = GameState.GAMEPLAY_CODE;
+                        last_time_switch = DateTime.Now.Millisecond;
+                    }
+                    
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    GAMESTATE = GameState.TITLESCREEN;
+                }
+            }
+            else if(GAMESTATE == GameState.LEVEL_SELECT)
+            {
+                //TODO fill in code here
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    GAMESTATE = GameState.TITLESCREEN;
+                }
             }
 
             foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
