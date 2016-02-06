@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Codeathon_Game
 {
@@ -13,6 +15,7 @@ namespace Codeathon_Game
         int window_height;
         int window_width;
         GameState GAMESTATE;
+        int last_time_switch =0;
 
         public static Dictionary<string, SpriteFont> fonts;
 
@@ -25,7 +28,7 @@ namespace Codeathon_Game
         };
 
         Texture2D key, Lock;
-
+        
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -90,12 +93,13 @@ namespace Codeathon_Game
 
         protected override void Update(GameTime gameTime)
         {
-            
+
+            Debug.WriteLine( DateTime.Now.Millisecond- last_time_switch);
             if (GAMESTATE == GameState.TITLESCREEN)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                    GAMESTATE = GameState.GAMEPLAY_VIEW;
+                     GAMESTATE = GameState.GAMEPLAY_VIEW;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
@@ -107,7 +111,13 @@ namespace Codeathon_Game
                 //TODO fill in code here
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                    GAMESTATE = GameState.GAMEPLAY_VIEW;
+
+                    if(DateTime.Now.Millisecond - last_time_switch > 500)
+                    {
+                        GAMESTATE = GameState.GAMEPLAY_VIEW;
+                        last_time_switch = DateTime.Now.Millisecond;
+                    }
+                    
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -117,10 +127,15 @@ namespace Codeathon_Game
             }
             else if(GAMESTATE == GameState.GAMEPLAY_VIEW)
             {
-                //TODO fill in code here
+                
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                    GAMESTATE = GameState.GAMEPLAY_CODE;
+                    if(DateTime.Now.Millisecond -last_time_switch > 500)
+                    {
+                        GAMESTATE = GameState.GAMEPLAY_CODE;
+                        last_time_switch = DateTime.Now.Millisecond;
+                    }
+                    
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
