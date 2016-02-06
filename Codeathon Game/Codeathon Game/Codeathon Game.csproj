@@ -45,6 +45,7 @@
     <Compile Include="AnimShape.cs" />
     <Compile Include="BlockData.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Levels.cs" />
     <Compile Include="MouseDrag.cs" />
     <Compile Include="ObjectToDraw.cs" />
     <Compile Include="Player.cs" />

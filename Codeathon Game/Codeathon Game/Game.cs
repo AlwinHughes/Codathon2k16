@@ -123,8 +123,8 @@ namespace Codeathon_Game
            
 
             Texture2D wall = Content.Load<Texture2D>("images/Wall");
+             OBJECTS[(int)GameState.GAMEPLAY_VIEW].AddRange(Levels.loadLevel(wall));
 
-            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Tile(new Vector2(100,100),Tile.WallState.CORNER_E,0,wall));
 
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");            
@@ -208,7 +208,7 @@ namespace Codeathon_Game
 
             foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
             {
-                curObject.Update();
+                    curObject.Update();
             }
 
             base.Update(gameTime);
