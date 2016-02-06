@@ -5,23 +5,16 @@ using System.Collections.Generic;
 
 namespace Codeathon_Game
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
-    
-    
     public class Game : Microsoft.Xna.Framework.Game
     {
         static public GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
 
-
         int window_height;
         int window_width;
         GameState GAMESTATE;
 
-        public static Dictionary<string,SpriteFont> fonts;        
-
+        public static Dictionary<string,SpriteFont> fonts;
 
         List<ObjectToDrawBase>[] OBJECTS = new List<ObjectToDrawBase>[]
         {
@@ -54,10 +47,8 @@ namespace Codeathon_Game
             base.Initialize();
         }
 
-        
         protected override void LoadContent()
         {
-            
             spriteBatch = new SpriteBatch(GraphicsDevice);
             fonts = new Dictionary<string, SpriteFont>();
 
@@ -70,20 +61,18 @@ namespace Codeathon_Game
             key = Content.Load<Texture2D>("images/key");
         }
 
-        
         protected override void UnloadContent(){}
-
         
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 Exit();
-
+            }
 
             base.Update(gameTime);
         }
 
-        
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -91,19 +80,15 @@ namespace Codeathon_Game
             spriteBatch.Begin();
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
             spriteBatch.End();
-            // TODO: Add your drawing code here
 
             foreach(ObjectToDrawBase draw in OBJECTS[(int)GAMESTATE])
             {
                 draw.Draw();
             }
 
-
             base.Draw(gameTime);
         }
     }
-
-
 
     public enum GameState
     {
