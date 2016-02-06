@@ -104,6 +104,8 @@ namespace Codeathon_Game
 
             OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Player(new Vector2(100, 200), Content.Load<Texture2D>("images/Body"), Content.Load<Texture2D>("images/Track")));
 
+            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Tile(new Vector2(0,0),Tile.WallState.STRAIGHT,0));
+
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");
             tile = Content.Load<Texture2D>("images/LabTile");
