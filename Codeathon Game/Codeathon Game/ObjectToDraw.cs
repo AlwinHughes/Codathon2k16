@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework;
 
 namespace Codeathon_Game
 {
+    [Serializable]
     class ObjectToDraw
     {
         public Texture2D texture;
