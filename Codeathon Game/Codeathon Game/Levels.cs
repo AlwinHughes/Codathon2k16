@@ -30,7 +30,7 @@ namespace Codeathon_Game
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    newObjects[i] = new Tile(new Vector2(x , y) + new Vector2((int)tings[i],0), tings[i], 0, wall);
+                    newObjects[i] = new Tile(new Vector2(x , y) + new Vector2((int)tings[i] * 64,0), tings[i],0, wall);
                     i++;
                     x += 64;
                 }
