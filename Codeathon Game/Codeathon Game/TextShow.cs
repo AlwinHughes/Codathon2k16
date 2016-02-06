@@ -28,6 +28,7 @@ namespace Codeathon_Game
 
         Color[] border_colors;
         int[] border_widths;
+        BlockData blockData;
 
         bool complex;
         // used for simple creation
@@ -83,27 +84,28 @@ namespace Codeathon_Game
             generateTextureComplex(border_widths, border_colors, inside_color);
         }
 
-        //public TextShow(Vector2 location, blockType type)
-        //   : base(location, (int)Game1.title_font.MeasureString(BlockData.getName(type)).X + 8 + 4 + 4, (int)Game1.title_font.MeasureString(BlockData.getName(type)).Y + 8 + 4 + 4)
-        //{
-        //    blockData = new BlockData(type);
-        //    is_text_show = true;
-        //    font = "title";
-        //    inside_color = Color.Yellow;
-        //    border_colors = blockData.borderColours;
-        //    text_color = blockData.textColour;
-        //    text = blockData.name;
-        //    canBeDraged = true;
-        //    sprite_height = (int)Game1.fonts[font].MeasureString(text).Y;
-        //    sprite_length = (int)Game1.fonts[font].MeasureString(text).X;
+        public TextShow(Vector2 location, blockType type)
+           : base(location, (int)Game.fonts["font16"].MeasureString(BlockData.getName(type)).X + 8 + 4 + 4, (int)Game.fonts["font16"].MeasureString(BlockData.getName(type)).Y + 8 + 4 + 4)
+        {
+            blockData = new BlockData(type);
+            border_widths = new int[] { 4, 4, 4, 4 };
+            
+            font = "title";
+            inside_color = Color.Yellow;
+            border_colors = blockData.borderColours;
+            text_color = blockData.textColour;
+            text = blockData.name;
+            canBeDraged = true;
+            sprite_height = (int)Game.fonts["font16"].MeasureString(text).Y+ border_widths[1]+ border_widths[3];
+            sprite_length = (int)Game.fonts["font16"].MeasureString(text).X +border_widths[0]+ border_widths[2];
 
-        //    data = new Color[width * height];
-        //    data_to_convert = new Color[width, height];
+            data = new Color[width * height];
+            data_to_convert = new Color[width, height];
 
-        //    border_size = 8;
+            
 
-        //    generateTextureComplex(new int[4] { 4, 4, 4, 4 }, border_colors, inside_color);
-        //}
+            generateTextureComplex(new int[4] { 4, 4, 4, 4 }, border_colors, inside_color);
+        }
 
         public void generateTextureComplex(int[] boder_sizes, Color[] border_colors, Color inside_color)
         {
