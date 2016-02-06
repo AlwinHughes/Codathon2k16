@@ -59,12 +59,12 @@ namespace Codeathon_Game
             }
         }
 
-        public virtual void update()
+        public virtual void Update()
         {
 
         }
 
-        public virtual void checkEdges()
+        public virtual void CheckEdges()
         {
 
         }
