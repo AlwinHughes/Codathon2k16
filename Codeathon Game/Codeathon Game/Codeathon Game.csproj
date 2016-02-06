@@ -51,6 +51,12 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\GameCode.cs" />
+    <Compile Include="Screens\GamePlay.cs" />
+    <Compile Include="Screens\GameView.cs" />
+    <Compile Include="Screens\LevelSelect.cs" />
+    <Compile Include="Screens\Screen.cs" />
+    <Compile Include="Screens\TitleScreen.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="TextShow.cs" />
     <Compile Include="Tile.cs" />
