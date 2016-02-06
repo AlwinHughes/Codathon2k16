@@ -34,9 +34,9 @@ namespace Codeathon_Game
         public ObjectToDraw(GraphicsDevice d, Vector2 location, int width, int height)
         {
             this.location = location;
-            texture = new Texture2D(d, width, height);
             this.width = width;
             this.height = height;
+            texture = new Texture2D(d, this.width, this.height);
         }
 
         public ObjectToDraw(Vector2 location, int width, int height)
