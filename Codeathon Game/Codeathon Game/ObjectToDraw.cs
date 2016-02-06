@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework;
 namespace Codeathon_Game
 {
     [Serializable]
-    class ObjectToDraw
+    public class ObjectToDraw
     {
         public Texture2D texture;
         public Vector2 location;

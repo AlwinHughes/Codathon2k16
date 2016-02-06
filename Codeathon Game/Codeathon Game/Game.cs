@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Storage;
-using System.Diagnostics;
-using System.Linq;
-using System.IO.IsolatedStorage;
-using System.IO;
-using System.Xml.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 using MonoGame.Extended.InputListeners;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Codeathon_Game
 {
@@ -22,28 +15,24 @@ namespace Codeathon_Game
 
 
         private InputListenerManager _inputManager;
-        MouseState previous;
-        public static MouseState current;
+
+        Screens.TitleScreen titlescreen = new Screens.TitleScreen();
+        Screens.GamePlay gameplay = new Screens.GamePlay();
+        Screens.GameView gameview = new Screens.GameView();
+        Screens.GameCode gamecode = new Screens.GameCode();
+        Screens.LevelSelect levelselect = new Screens.LevelSelect();
+
         int window_height;
         int window_width;
         GameState GAMESTATE;
         int last_time_switch =0;
-        MouseDrag mouse = new MouseDrag();
 
         public static Dictionary<string, SpriteFont> fonts;
 
-        List<ObjectToDraw>[] OBJECTS = new List<ObjectToDraw>[]
-        {
-            new List<ObjectToDraw>(),//title screen
-            new List<ObjectToDraw>(),//game play view
-            new List<ObjectToDraw>(),//game play code
-            new List<ObjectToDraw>()// level select
-        };
+        List<ObjectToDraw>[] Screens;
 
         Texture2D key, Lock;
-
-        Texture2D tile;
-
+        
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -52,6 +41,7 @@ namespace Codeathon_Game
 
         protected override void Initialize()
         {
+            Screens = new List<ObjectToDraw>[]{ titlescreen.drawItems, gameview.drawItems, gamecode.drawItems, levelselect.drawItems };
             _inputManager = new InputListenerManager();
 
             GAMESTATE = GameState.TITLESCREEN;
@@ -73,18 +63,20 @@ namespace Codeathon_Game
             var keyboardListener = _inputManager.AddListener(new KeyboardListenerSettings());
 
             //HERE BE BOOTY
-            keyboardListener.KeyPressed += (sender, args) =>
-            {
-                if (args.Key == Keys.Space)
-                    Debug.WriteLine("Space Pressed");
-            };
+            keyboardListener.KeyPressed += (sender, args) => KeyPress("{0} key pressed", args.Key);
 
 
             base.Initialize();
         }
 
+        private void KeyPress(string v, Keys key)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void LoadContent()
         {
+
             spriteBatch = new SpriteBatch(GraphicsDevice);
             fonts = new Dictionary<string, SpriteFont>();
 
@@ -94,75 +86,40 @@ namespace Codeathon_Game
             fonts.Add("font40", Content.Load<SpriteFont>("fonts/font40"));
             fonts.Add("fontText", Content.Load<SpriteFont>("fonts/fontText"));
 
-            OBJECTS[(int)GameState.TITLESCREEN].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font40", "TITLE!!!!!!!!", Color.Black, false));
-            ((TextShow)OBJECTS[(int)GameState.TITLESCREEN][0]).center();
+            titlescreen.drawItems.Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font40", "TITLE!!!!!!!!", Color.Black, false));
+            ((TextShow)Screens[(int)GameState.TITLESCREEN][0]).center();
+            titlescreen.drawItems.Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Press Space", Color.Black, false));
+            ((TextShow)Screens[(int)GameState.TITLESCREEN][1]).center();
+            ((TextShow)Screens[(int)GameState.TITLESCREEN][1]).location.Y += 100;
 
-            OBJECTS[(int)GameState.TITLESCREEN].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Press Space", Color.Black, false));
-            ((TextShow)OBJECTS[(int)GameState.TITLESCREEN][1]).center();
-            ((TextShow)OBJECTS[(int)GameState.TITLESCREEN][1]).location.Y += 100;
+            gameview.drawItems.Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Play Level", Color.Black, false));
+            gameview.drawItems.Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Progarm Level", Color.Black, false));
+            ((TextShow)Screens[(int)GameState.GAMEPLAY_VIEW][0]).center();
+            ((TextShow)Screens[(int)GameState.GAMEPLAY_VIEW][0]).location.Y = 5;
 
-            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Play Level", Color.Black, false));
-            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_VIEW][0]).center();
-            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_VIEW][0]).location.Y = 5;
-            
-
-            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Progarm Level", Color.Black, false));
-            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).center();
-            ((TextShow)OBJECTS[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
-
-            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Player(new Vector2(100, 100), Content.Load<Texture2D>("images/Body"), Content.Load<Texture2D>("images/Track")));
+            gamecode.drawItems.Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Progarm Level", Color.Black, false));
+            ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).center();
+            ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
 
 
-            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(50, 100), blockType.MOVEFORWARD, false));
-            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(50, 200), blockType.LEFT, false));
-            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(50, 300), blockType.RIGHT, false));
 
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");
-            
-           
-
-            Texture2D wall = Content.Load<Texture2D>("images/Wall");
-
-            OBJECTS[(int)GameState.GAMEPLAY_VIEW].Add(new Tile(new Vector2(100,100),Tile.WallState.CORNER_E,0,wall));
-
-            key = Content.Load<Texture2D>("images/key");
-            Lock = Content.Load<Texture2D>("images/LockedBlock");            
-
         }
 
         protected override void UnloadContent() { }
 
         protected override void Update(GameTime gameTime)
         {
-            //mouse input
-            current = Mouse.GetState();
-            if (current.LeftButton == ButtonState.Pressed)
-            {
-                if (previous.LeftButton != ButtonState.Pressed)
-                {
-                    mouse.CheckClick(OBJECTS[(int)GAMESTATE]);
-                }
-            }
-            else
-            {
-                if (mouse.draggedObject != null)
-                {
-                    ((TextShow)mouse.draggedObject).Dock(OBJECTS[(int)GameState.GAMEPLAY_VIEW]);
 
-                    mouse.draggedObject = null;
-                }
-            }
-            mouse.Update();
-            previous = current;
-            //keyboard input
+
             _inputManager.Update(gameTime);
 
             if (GAMESTATE == GameState.TITLESCREEN)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.I))
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                     GAMESTATE = GameState.GAMEPLAY_CODE;
+                     GAMESTATE = GameState.GAMEPLAY_VIEW;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 {
@@ -172,9 +129,15 @@ namespace Codeathon_Game
             else if( GAMESTATE == GameState.GAMEPLAY_CODE)
             {
                 //TODO fill in code here
-                if (Keyboard.GetState().IsKeyDown(Keys.O))
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                     GAMESTATE = GameState.GAMEPLAY_VIEW;
+
+                    if(DateTime.Now.Millisecond - last_time_switch > 500)
+                    {
+                        GAMESTATE = GameState.GAMEPLAY_VIEW;
+                        last_time_switch = DateTime.Now.Millisecond;
+                    }
+                    
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -185,11 +148,14 @@ namespace Codeathon_Game
             else if(GAMESTATE == GameState.GAMEPLAY_VIEW)
             {
                 
-                if (Keyboard.GetState().IsKeyDown(Keys.I))
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                    
+                    if(DateTime.Now.Millisecond -last_time_switch > 500)
+                    {
                         GAMESTATE = GameState.GAMEPLAY_CODE;
                         last_time_switch = DateTime.Now.Millisecond;
+                    }
+                    
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -206,11 +172,6 @@ namespace Codeathon_Game
                 }
             }
 
-            foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
-            {
-                curObject.Update();
-            }
-
             base.Update(gameTime);
         }
 
@@ -218,12 +179,16 @@ namespace Codeathon_Game
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.BackToFront);
+            spriteBatch.Begin();
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
+            
        
-            foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
+
+      
+         
+            foreach (ObjectToDraw curObject in Screens[(int)GAMESTATE])
             {
-                curObject.Draw();
+               curObject.Draw();
             }
             spriteBatch.End();
             base.Draw(gameTime);
