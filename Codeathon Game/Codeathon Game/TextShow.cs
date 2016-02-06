@@ -16,9 +16,8 @@ namespace Codeathon_Game
         string text;
         string font;
 
-        int border_size;
         Color inside_color;
-        Color border_color;
+        
         Color text_color;
 
         int sprite_length;
@@ -39,8 +38,8 @@ namespace Codeathon_Game
             complex = false;
             this.font = font;
             this.inside_color = inside_color;
-            this.border_color = border_color;
-            this.border_size = border_size;
+            this.border_colors = new Color[] { border_color, border_color , border_color , border_color };
+            this.border_widths = new int[] { border_size, border_size, border_size, border_size};
             this.text_color = text_color;
             this.text = text;
             this.canBeDraged = can_be_draged;
@@ -50,7 +49,7 @@ namespace Codeathon_Game
             data = new Color[width * height];
             data_to_convert = new Color[width, height];
 
-            generateTexture(border_size, inside_color, border_color, text_color);
+            generateTextureComplex(border_widths, border_colors, inside_color);
 
         }
 
@@ -59,7 +58,10 @@ namespace Codeathon_Game
             : base(location, (int)Game.fonts[font].MeasureString(text).X + 8 + border_widths[0] + border_widths[2], (int)Game.fonts[font].MeasureString(text).Y + 8 + border_widths[1] + border_widths[3])
 
         {
-            
+            if(border_widths.Length != 4||border_colors.Length != 4)
+            {
+                throw new Exception();
+            }
             complex = true;
             this.font = font;
             this.inside_color = inside_color;
@@ -71,7 +73,6 @@ namespace Codeathon_Game
             sprite_height = (int)Game.fonts[font].MeasureString(text).Y;
             sprite_length = (int)Game.fonts[font].MeasureString(text).X;
 
-            border_size = border_widths[0];
 
             data = new Color[width * height];
             data_to_convert = new Color[width, height];
@@ -159,24 +160,24 @@ namespace Codeathon_Game
             }
             convertTo1DArray();
         }
-        public void generateTexture(int border_size, Color inside, Color border, Color text_color)//only alows color change not size change 
-        {
-            for (int i = 0; i < width; i++)
-            {
-                for (int j = 0; j < height; j++)
-                {
-                    if (i < border_size || i > width - border_size || j < border_size || j > height - border_size)
-                    {
-                        data_to_convert[i, j] = border;
-                    }
-                    else
-                    {
-                        data_to_convert[i, j] = inside;
-                    }
-                }
-            }
-            convertTo1DArray();
-        }
+        //public void generateTexture(int border_size, Color inside, Color border, Color text_color)//only alows color change not size change 
+        //{
+        //    for (int i = 0; i < width; i++)
+        //    {
+        //        for (int j = 0; j < height; j++)
+        //        {
+        //            if (i < border_size || i > width - border_size || j < border_size || j > height - border_size)
+        //            {
+        //                data_to_convert[i, j] = border;
+        //            }
+        //            else
+        //            {
+        //                data_to_convert[i, j] = inside;
+        //            }
+        //        }
+        //    }
+        //    convertTo1DArray();
+        //}
 
         private void convertTo1DArray()
         {
@@ -194,15 +195,8 @@ namespace Codeathon_Game
         public override void Draw()
         {
             Game.spriteBatch.Draw(texture, new Rectangle((int)location.X, (int)location.Y, texture.Width, texture.Height), Color.White);
-            Game.spriteBatch.DrawString(Game.fonts[font], text, new Vector2(location.X + border_size, location.Y + border_size), text_color);
-        }
-
-        public Vector2 getOffset()
-        {
-            return new Vector2(4 + border_size + sprite_length / 2, 4 + border_size + sprite_height / 2);
-        }
-
-       
+            Game.spriteBatch.DrawString(Game.fonts[font], text, new Vector2(location.X + border_widths[0], location.Y + border_widths[1]), text_color);
+        }     
 
     }
 }
