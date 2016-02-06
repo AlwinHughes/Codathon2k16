@@ -8,10 +8,17 @@ namespace Codeathon_Game
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+    
+    
     public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
+
+        int window_height;
+        int wnidow_width;
+        GameState GAMESTATE;
+
         List<ObjectToDraw>[] OBJECTS = new List<ObjectToDraw>[]
         {
             new List<ObjectToDraw>(),//title screen
@@ -28,7 +35,15 @@ namespace Codeathon_Game
         
         protected override void Initialize()
         {
-            
+            GAMESTATE = GameState.TITLESCREEN;
+            wnidow_width = graphics.GraphicsDevice.DisplayMode.Width;
+            window_height = graphics.GraphicsDevice.DisplayMode.Height;
+            graphics.PreferredBackBufferHeight = window_height;
+            graphics.PreferredBackBufferWidth = wnidow_width;
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
+            IsMouseVisible = true;
+
 
             base.Initialize();
         }
