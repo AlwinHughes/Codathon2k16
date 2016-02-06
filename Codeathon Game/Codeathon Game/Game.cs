@@ -64,6 +64,13 @@ namespace Codeathon_Game
             fonts.Add("font40", Content.Load<SpriteFont>("fonts/font40"));
             fonts.Add("fontText", Content.Load<SpriteFont>("fonts/fontText"));
 
+            OBJECTS[(int)GAMESTATE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font40", "TITLE!!!!!!!!", Color.Black, false));
+            ((TextShow)OBJECTS[(int)GAMESTATE][0]).center();
+            OBJECTS[(int)GAMESTATE].Add(new TextShow(new Vector2(window_width / 2, window_height / 2), 4, Color.Transparent, Color.CadetBlue, "font24", "Press Space", Color.Black, false));
+            ((TextShow)OBJECTS[(int)GAMESTATE][1]).center();
+            ((TextShow)OBJECTS[(int)GAMESTATE][1]).location.Y += 100;
+
+
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");
         }
@@ -86,13 +93,13 @@ namespace Codeathon_Game
 
             spriteBatch.Begin();
             spriteBatch.Draw(key, new Vector2(40, 40), Color.White);
-            spriteBatch.End();
-
+            
+       
             foreach (ObjectToDraw curObject in OBJECTS[(int)GAMESTATE])
             {
                 curObject.Draw();
             }
-
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
