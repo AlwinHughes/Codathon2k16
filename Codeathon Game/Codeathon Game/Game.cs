@@ -24,7 +24,7 @@ namespace Codeathon_Game
             new List<ObjectToDrawBase>()// level select
         };
 
-        Texture2D key;
+        Texture2D key, Lock;
 
         public Game()
         {
@@ -64,6 +64,7 @@ namespace Codeathon_Game
             fonts.Add("fontText", Content.Load<SpriteFont>("fonts/fontText"));
 
             key = Content.Load<Texture2D>("images/key");
+            Lock = Content.Load<Texture2D>("images/LockedBlock");
         }
 
         protected override void UnloadContent() { }
