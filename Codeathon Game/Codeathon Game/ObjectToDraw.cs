@@ -22,16 +22,13 @@ namespace Codeathon_Game
 
         public ObjectToDraw dock;
         public Vector2 dockOffset;
-        public bool is_text_show = false;
 
-
-        public ObjectToDraw(Texture2D texture, Vector2 location, int width, int height)
+        public ObjectToDraw(Texture2D texture, Vector2 location)
         {
             this.location = location;
             this.texture = texture;
-            this.width = width;
-            this.height = height;
-
+            width = texture.Width;
+            height = texture.Height;
         }
 
         public ObjectToDraw(GraphicsDevice d, Vector2 location, int width, int height)
