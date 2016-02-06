@@ -107,6 +107,7 @@ namespace Codeathon_Game
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");
             tile = Content.Load<Texture2D>("images/LabTile");
+            
         }
 
         protected override void UnloadContent() { }
