@@ -33,12 +33,9 @@ namespace Codeathon_Game
         };
 
         Texture2D key, Lock;
-<<<<<<< HEAD
+
         Texture2D tile;
 
-=======
-        
->>>>>>> bdbca69d32842b341df4e06f21b124e7d643fcdb
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
