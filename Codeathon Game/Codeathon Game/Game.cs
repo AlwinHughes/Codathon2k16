@@ -115,7 +115,7 @@ namespace Codeathon_Game
 
             OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(50, 100), blockType.MOVEFORWARD, false));
             OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(50, 200), blockType.LEFT, false));
-            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(50, 200), blockType.RIGHT, false));
+            OBJECTS[(int)GameState.GAMEPLAY_CODE].Add(new TextShow(new Vector2(50, 300), blockType.RIGHT, false));
 
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");
