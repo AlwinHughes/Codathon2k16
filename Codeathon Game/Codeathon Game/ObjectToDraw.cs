@@ -49,9 +49,16 @@ namespace Codeathon_Game
 
         }
 
-        public virtual void draw()
+        virtual public void Draw()
         {
-
+            if (rotation != 0)
+            {
+                Game.spriteBatch.Draw(texture, new Rectangle((int)location.X, (int)location.Y, texture.Width, texture.Height), null, Color.White, rotation, new Vector2(texture.Width / 2, texture.Height / 2), SpriteEffects.None, 0f);
+            }
+            else
+            {
+                Game.spriteBatch.Draw(texture, new Rectangle((int)location.X, (int)location.Y, texture.Width, texture.Height), Color.White);
+            }
         }
 
         public virtual void update()

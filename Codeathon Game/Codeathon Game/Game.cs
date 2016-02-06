@@ -10,7 +10,7 @@ namespace Codeathon_Game
     public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static SpriteBatch spriteBatch;
 
         public Game()
         {
