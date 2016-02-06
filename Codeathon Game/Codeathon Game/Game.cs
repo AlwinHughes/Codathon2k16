@@ -27,12 +27,12 @@ namespace Codeathon_Game
 
         int window_height;
         int window_width;
-        GameState GAMESTATE;
+        public static GameState GAMESTATE;
         int last_time_switch = 0;
 
         public static Dictionary<string, SpriteFont> fonts;
 
-        List<ObjectToDraw>[] Screens;
+        public static List<ObjectToDraw>[] Screens;
 
         Texture2D key, Lock;
 
@@ -98,15 +98,15 @@ namespace Codeathon_Game
             ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).center();
             ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
 
-<<<<<<< HEAD
+
 
             gamecode.drawItems.Add(new TextShow(new Vector2(50, 100), blockType.MOVEFORWARD, false));
             gamecode.drawItems.Add(new TextShow(new Vector2(50, 200), blockType.RIGHT, false));
             gamecode.drawItems.Add(new TextShow(new Vector2(50, 300), blockType.LEFT, false));
             //eh eh
 
-=======
->>>>>>> fae39d4e9fefca4b67ad4ad717c74434aaa45f55
+
+
             key = Content.Load<Texture2D>("images/key");
             Lock = Content.Load<Texture2D>("images/LockedBlock");            
 
