@@ -105,6 +105,10 @@ namespace Codeathon_Game
             ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).center();
             ((TextShow)Screens[(int)GameState.GAMEPLAY_CODE][0]).location.Y = 5;
 
+
+            gamecode.drawItems.Add(new TextShow(new Vector2(50, 100), blockType.MOVEFORWARD, false));
+            gamecode.drawItems.Add(new TextShow(new Vector2(50, 200), blockType.RIGHT, false));
+            gamecode.drawItems.Add(new TextShow(new Vector2(50, 300), blockType.LEFT, false));
             //eh eh
 
             key = Content.Load<Texture2D>("images/key");
